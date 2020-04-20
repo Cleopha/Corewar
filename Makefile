@@ -9,7 +9,7 @@ MAKEFLAGS	+=	--no-print-directory
 
 LFLAGS	=
 
-CFLAGS	=	-Wall -Wextra
+CFLAGS	+=	-Wall -Wextra
 
 CPPFLAGS =	-I./include
 
@@ -26,7 +26,7 @@ MOBJ	=	$(MAIN:.c=.o)
 OBJ	=	$(SRC:.c=.o)
 
 ifdef DEBUG
-  CFLAGS += -ggdb3 -DDEBUG=1
+  CFLAGS += -ggdb3 -DDEBUG
 endif
 
 %.o:	%.c
@@ -39,14 +39,10 @@ all:	$(NAME)
 $(NAME):	$(OBJ)	$(MOBJ)
 		@gcc $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
 
-debug:	CFLAGS	+=	-g
-debug:	$(NAME)
-
 clean:
 	@echo -e -n "\033[91m[ RM ]\033[0m"
-	@echo " *.o"
-	@rm -f $(OBJ)
-	@rm -f $(MOBJ)
+	@echo "*.o"
+	@rm -f $(OBJ) $(MOBJ)
 
 fclean: clean
 	@echo -e -n "\033[91m[ RM ]\033[0m"
