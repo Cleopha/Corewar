@@ -9,5 +9,7 @@
 #define _COREWAR_H_
 
 #include "debug.h"
+#include "corewar_util.h"
+#include "corewar_operation.h"
 
 #endif

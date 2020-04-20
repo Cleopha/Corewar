@@ -17,7 +17,8 @@ TFLAGS	=	-lcriterion --coverage
 
 NAME	=	corewar
 
-SRC	=
+SRC		=	src/operations.c \
+			src/util/hash.c
 
 MAIN 	=	src/main.c
 
