@@ -1,0 +1,9 @@
+.idea/
+cmake-build-debug/
+CMakeLists.txt
+*.o
+*.a
+*.gc*
+vgcore.*
+**/unit_tests
+**/corewar

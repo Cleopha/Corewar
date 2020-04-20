@@ -25,6 +25,10 @@ MOBJ	=	$(MAIN:.c=.o)
 
 OBJ	=	$(SRC:.c=.o)
 
+ifdef DEBUG
+  CFLAGS += -ggdb3 -DDEBUG=1
+endif
+
 %.o:	%.c
 	@echo -e -n "\033[92m[ OK ]\033[0m"
 	@echo "" $<
