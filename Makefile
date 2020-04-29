@@ -7,20 +7,23 @@
 
 MAKEFLAGS	+=	--no-print-directory
 
-LFLAGS	=
+LFLAGS	= -L./libs -lcubee
 
 CFLAGS	+=	-Wall -Wextra
 
-CPPFLAGS =	-I./include
+CPPFLAGS =	-I./include -I./libs/cubee/include
 
 TFLAGS	=	-lcriterion --coverage
 
 NAME	=	corewar
 
-SRC		=	src/operations.c \
-			src/util/hash.c
+SRC		=	src/compiler/free/instruction.c		\
+			src/compiler/parser/word_parser.c	\
+			src/compiler/operations.c			\
+			src/compiler/util/hash.c			\
+			src/compiler/writer.c
 
-MAIN 	=	src/main.c
+MAIN 	=	src/compiler/main.c
 
 MOBJ	=	$(MAIN:.c=.o)
 
@@ -38,14 +41,17 @@ endif
 all:	$(NAME)
 
 $(NAME):	$(OBJ)	$(MOBJ)
+		@make -C ./libs/cubee all
 		@gcc $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
 
 clean:
+	@make -C ./libs/cubee clean
 	@echo -e -n "\033[91m[ RM ]\033[0m"
 	@echo "*.o"
 	@rm -f $(OBJ) $(MOBJ)
 
 fclean: clean
+	@make -C ./libs/cubee fclean
 	@echo -e -n "\033[91m[ RM ]\033[0m"
 	@echo " Binary"
 	@rm -f $(NAME)

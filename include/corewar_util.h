@@ -9,8 +9,7 @@
 #define _COREWAR_UTIL_H_
 
 #include <unistd.h>
-#include "debug.h"
 
-ssize_t hash(const char *str);
+ssize_t strhash(const char *str);
 
 #endif

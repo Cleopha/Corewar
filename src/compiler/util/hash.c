@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2020
 ** CoreWar
 ** File description:
-** hash functions
+** strhash functions
 */
 
 #include "corewar_util.h"
 
-ssize_t hash(const char *str)
+ssize_t strhash(const char *str)
 {
     size_t result = 0;
 

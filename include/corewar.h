@@ -8,7 +8,10 @@
 #ifndef _COREWAR_H_
 #define _COREWAR_H_
 
-#include "debug.h"
+#include <stdio.h>
+
+#include "cubee.h"
+#include "corewar_compiler.h"
 #include "corewar_util.h"
 #include "corewar_operation.h"
 
