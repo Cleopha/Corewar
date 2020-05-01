@@ -10,6 +10,14 @@
 
 #include <unistd.h>
 
+typedef struct info_s
+{
+    int index_op;
+    int index_word;
+    int nb_param;
+    int byte;
+}info_t;
+
 ssize_t strhash(const char *str);
 
 #endif
