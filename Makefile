@@ -17,11 +17,18 @@ TFLAGS	=	-lcriterion --coverage
 
 NAME	=	corewar
 
-SRC		=	src/compiler/free/instruction.c		\
-			src/compiler/parser/word_parser.c	\
-			src/compiler/operations.c			\
-			src/compiler/util/hash.c			\
-			src/compiler/writer.c
+COMPILER	:=	./src/compiler
+PARSER	:=	./src/compiler/parser
+
+SRC		=	$(COMPILER)/free/instruction.c		\
+			$(COMPILER)/operations.c			\
+			$(COMPILER)/util/hash.c			\
+			$(COMPILER)/writer.c	\
+
+SRC	+=		$(PARSER)/word_parser.c	\
+			$(PARSER)/check_param.c	\
+			$(PARSER)/convert_in_bin.c	\
+			$(PARSER)/error_management.c	\
 
 MAIN 	=	src/compiler/main.c
 
