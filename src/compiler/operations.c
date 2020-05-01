@@ -7,7 +7,7 @@
 
 #include "corewar_operation.h"
 
-op_t op_tab[23] = {
+op_t op_tab[] = {
     {3322092, "live", 1, {T_DIR}, 1, 10, "alive"},
     {3448, "ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load"},
     {3681, "st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store"},

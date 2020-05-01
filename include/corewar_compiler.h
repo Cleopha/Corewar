@@ -15,7 +15,7 @@
 struct inst_s {
     char *bytes;
     size_t size;
-    struct instruction_s *next;
+    struct inst_s *next;
 };
 typedef struct inst_s inst_t;
 

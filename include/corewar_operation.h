@@ -9,15 +9,15 @@
 #define _COREWAR_OPERATION_H_
 
 #ifndef PROG_NAME_LENGTH
-#define PROG_NAME_LENGTH
+#define PROG_NAME_LENGTH 128
 #endif
 
 #ifndef COMMENT_LENGTH
-#define COMMENT_LENGTH
+#define COMMENT_LENGTH 2048
 #endif
 
 #ifndef MEM_SIZE
-#define MEM_SIZE (6*1024)
+#define MEM_SIZE (6 * 1024)
 #endif
 
 #ifndef IDX_MOD
@@ -56,6 +56,10 @@
 #define COMMENT_CMD_STRING ".comment"
 #endif
 
+#ifndef REG_NUMBER
+#define REG_NUMBER 16
+#endif
+
 #ifndef T_REG
 #define T_REG 1
 #endif
@@ -70,6 +74,30 @@
 
 #ifndef T_LAB
 #define T_LAB 8
+#endif
+
+#ifndef IND_SIZE
+#define IND_SIZE 2
+#endif
+
+#ifndef DIR_SIZE
+#define DIR_SIZE 4
+#endif
+
+#ifndef REG_SIZE
+#define REG_SIZE DIR_SIZE
+#endif
+
+#ifndef CYCLE_TO_DIE
+#define CYCLE_TO_DIE 1536
+#endif
+
+#ifndef CYCLE_DELTA
+#define CYCLE_DELTA 5
+#endif
+
+#ifndef NBR_LIVE
+#define NBR_LIVE 40
 #endif
 
 struct op_s {

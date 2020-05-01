@@ -22,27 +22,37 @@ static void add_node(inst_t **instructions, char *bytes, size_t size)
     *instructions = instruction;
 }
 
-static ssize_t parse_line(struct instruction_s **instructions, FILE *file)
+static ssize_t parse_instruction(inst_t **instructions, const char *line)
+{
+    char *bytes = NULL;
+    ssize_t bytes_size = 0;
+    char **words = (char **) tabsplit_clean(line, " ", sizeof(char));
+
+    if (!words)
+        return (0);
+    //bytes_size = the_fucking_coline_function(&bytes, words);
+    mcfree(words, 1, NULL);
+    add_node(instructions, bytes, bytes_size);
+    return ((bytes_size < 0) ? -2 : bytes_size);
+}
+
+static ssize_t parse_line(inst_t **instructions, FILE *file)
 {
     size_t n = 0;
     char *line = NULL;
     ssize_t size = getline(&line, &n, file);
-    char **words;
-    char *bytes = NULL;
-    size_t bytes_size = 0;
+    ssize_t bytes_size = 0;
 
-    if (size < 2 || !tabstart(line, "#", sizeof(char)))
-        return (size);
+    if (size < 2 || tabstart(line, "#", sizeof(char))
+        || tabstart(line, ".", sizeof(char)))
+        return (0);
     line[size - 1] = 0;
-    words = (char **) tabsplit_clean(line, " ", sizeof(char));
-    if (!words)
-        return (size);
-    //bytes_size = the_fucking_coline_function(&bytes, words);
-    if (bytes_size < 0)
-        return (-2);
-    mcfree(words, 1, NULL);
-    add_node(instructions, bytes, bytes_size);
-    return (size);
+    for (ssize_t i = 0; i < size; i++)
+        if (line[i] == ',')
+            line[i] = ' ';
+    bytes_size = parse_instruction(instructions, line);
+    free(line);
+    return (bytes_size);
 }
 
 inst_t *cw_compile(FILE *file)
@@ -51,6 +61,6 @@ inst_t *cw_compile(FILE *file)
 
     if (!file)
         return (NULL);
-    while (parse_line(&instructions, file) > 0);
+    while (parse_line(&instructions, file) >= 0);
     return (instructions);
 }
