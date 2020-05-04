@@ -1,8 +1,11 @@
 *~
 '#*#'
+.flooignore
+.floo
 .vscode/
 .idea/
 cmake-build-debug/
+cmake-build-debug-system/
 CMakeLists.txt
 *.o
 *.a
