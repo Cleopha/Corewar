@@ -1,9 +1,17 @@
+## Temporary editor files / directories
+
 *~
 '#*#'
 .vscode/
 .idea/
+
+## CMake configuration files
+
 cmake-build-debug/
 CMakeLists.txt
+
+# Binaries files
+
 *.o
 *.a
 *.gc*
