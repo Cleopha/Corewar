@@ -16,7 +16,7 @@ typedef struct info_s
     int index_word;
     int nb_param;
     int byte;
-}info_t;
+} info_t;
 
 ssize_t strhash(const char *str);
 
