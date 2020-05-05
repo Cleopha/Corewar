@@ -2,12 +2,15 @@
 
 *~
 '#*#'
+.flooignore
+.floo
 .vscode/
 .idea/
 
 ## CMake configuration files
 
 cmake-build-debug/
+cmake-build-debug-system/
 CMakeLists.txt
 
 # Binaries files

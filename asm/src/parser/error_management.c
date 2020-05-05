@@ -7,18 +7,8 @@
 
 #include "corewar.h"
 
-ssize_t strhash(const char *str);
-
 int loop_check(char **words, unsigned char *param, info_t *info);
 size_t loop_fill_bytes(char **bytes, char **words, info_t info);
-
-void create_info(info_t *info, int index)
-{
-    info->index_op = index;
-    info->index_word = 1;
-    info->nb_param = 0;
-    info->byte = 1;
-}
 
 int malloc_bytes(char **bytes, info_t info, unsigned char param)
 {
@@ -37,12 +27,12 @@ size_t error_management(char **bytes, char **words)
     unsigned char param = 0;
     info_t info;
 
-    for (; index_op <= 17; index_op += 1)
+    for (; op_tab[index_op].mnemonique; index_op += 1)
         if (op_tab[index_op].hash == hash)
             break;
-    if (index_op >= 17)
+    if (!op_tab[index_op].mnemonique)
         return (-1);
-    create_info(&info, index_op);
+    info = (info_t) {index_op, 1, 0, 1};
     if (op_tab[index_op].nbr_args != (int)(tablen(words, sizeof(char *)) - 1))
         return (-1);
     if (loop_check(words, &param, &info))
