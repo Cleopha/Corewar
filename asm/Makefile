@@ -7,7 +7,7 @@
 
 MAKEFLAGS	+=	--no-print-directory
 
-LFLAGS	= -L./libs -lcubee
+LFLAGS	=	-L../libs -lcubee
 
 CFLAGS	+=	-Wall -Wextra
 
@@ -15,22 +15,22 @@ CPPFLAGS =	-I../include -I../libs/cubee/include
 
 TFLAGS	=	-lcriterion --coverage
 
-NAME	=	corewar
+NAME	=	asm
 
 COMPILER	:=	./src/
 PARSER	:=	./src/parser
 
-SRC		=	$(COMPILER)/free/instruction.c		\
-			$(COMPILER)/operations.c			\
-			$(COMPILER)/util/hash.c			\
-			$(COMPILER)/writer.c	\
+SRC	=	$(COMPILER)/free/instruction.c		\
+		$(COMPILER)/operations.c			\
+		$(COMPILER)/util/hash.c			\
+		$(COMPILER)/writer.c	\
 
-SRC	+=		$(PARSER)/word_parser.c	\
-			$(PARSER)/check_param.c	\
-			$(PARSER)/convert_in_bin.c	\
-			$(PARSER)/error_management.c	\
+SRC	+=	$(PARSER)/word_parser.c	\
+		$(PARSER)/check_param.c	\
+		$(PARSER)/convert_in_bin.c	\
+		$(PARSER)/error_management.c	\
 
-MAIN 	=	src/compiler/main.c
+MAIN 	=	src/main.c
 
 MOBJ	=	$(MAIN:.c=.o)
 
@@ -48,6 +48,7 @@ endif
 all:	$(NAME)
 
 $(NAME):	$(OBJ)	$(MOBJ)
+		@make -C ../libs/cubee all
 		@gcc $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
 
 clean:
@@ -56,6 +57,7 @@ clean:
 	@rm -f $(OBJ) $(MOBJ)
 
 fclean: clean
+	@make -C ../libs/cubee fclean
 	@echo -e -n "\033[91m[ RM ]\033[0m"
 	@echo " Binary"
 	@rm -f $(NAME)
