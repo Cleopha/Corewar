@@ -5,6 +5,8 @@
 ## Coline SEGURET's Makefile made the 05/07/2020
 ##
 
+CC			?=	gcc
+
 MAKEFLAGS	+=	--no-print-directory
 
 LFLAGS	=	-L../libs -lcubee
@@ -30,25 +32,23 @@ ifdef DEBUG
 endif
 
 %.o:	%.c
-	@echo -e -n "\033[92m[ OK ]\033[0m"
-	@echo "" $<
-	@gcc $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	-@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< && \
+	(echo -e "\033[92m[ OK ]\033[0m" $<) || \
+	(echo -e "\033[91m[ NO COMPIL ]\033[0m" $<; exit 1)
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)	$(MOBJ)
-		@make -C ../libs/cubee all
-		@gcc $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
+	@make -s -C ../libs/cubee all
+	@gcc $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
 
 clean:
-	@echo -e -n "\033[91m[ RM ]\033[0m"
-	@echo "*.o"
+	@echo -e "\033[91m[ RM ]\033[0m *.o"
 	@rm -f $(OBJ) $(MOBJ)
 
 fclean: clean
-	@make -C ../libs/cubee fclean
-	@echo -e -n "\033[91m[ RM ]\033[0m"
-	@echo " Binary"
+	@make -s -C ../libs/cubee fclean
+	@echo -e "\033[91m[ RM ]\033[0m Binary"
 	@rm -f $(NAME)
 
 re:     fclean all

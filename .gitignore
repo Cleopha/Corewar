@@ -20,4 +20,5 @@ CMakeLists.txt
 *.gc*
 vgcore.*
 **/unit_tests
-**/corewar
+corewar/corewar
+!corewar/

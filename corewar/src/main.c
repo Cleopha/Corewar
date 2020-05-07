@@ -28,5 +28,5 @@ int main(int ac, char **av)
     if (ac == 2 && (tabequals(av[1], "-h", sizeof(char)) ||
                     tabequals(av[1], "--helps", sizeof(char))))
         man(av[0]);
-    return(1);
+    return (1);
 }
