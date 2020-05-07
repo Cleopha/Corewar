@@ -1,8 +1,8 @@
 ##
-## EPITECH PROJECT, 2019
+## EPITECH PROJECT, 2020
 ## Makefile
 ## File description:
-## Gael Baron's Makefile
+## Coline SEGURET's Makefile made the 05/07/2020
 ##
 
 MAKEFLAGS	+=	--no-print-directory
