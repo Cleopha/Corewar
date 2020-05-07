@@ -7,11 +7,11 @@
 
 #include "corewar.h"
 
-int man(char *av)
+int man(char *av, int fd)
 {
     my_putstr("USAGE\n");
     my_putstr(av);
-    write(1, " [-dump nbr_cycle] [[-n prog_number] \
+    write(fd, " [-dump nbr_cycle] [[-n prog_number] \
 [-a load_address] prog_name]\nDESCRIPTION\n-dump nbr_cycledumps the memory \
 after the nbr_cycle execution (if the round isn’t\nalready over) with the \
 following format: 32 bytes/line\nin hexadecimal (A0BCDEFE1DD3...)\n-n \
@@ -27,6 +27,6 @@ int main(int ac, char **av)
 {
     if (ac == 2 && (tabequals(av[1], "-h", sizeof(char)) ||
                     tabequals(av[1], "--helps", sizeof(char))))
-        man(av[0]);
+        man(av[0], 1);
     return (1);
 }

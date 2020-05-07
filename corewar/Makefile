@@ -19,7 +19,7 @@ TFLAGS	=	-lcriterion --coverage
 
 NAME	=	corewar
 
-SRC	=
+SRC		=	src/init_champ.c
 
 MAIN 	=	src/main.c
 
