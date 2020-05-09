@@ -21,6 +21,16 @@ int display_error(char *str)
     return (1);
 }
 
+void attribute_prognumber(param_t *param)
+{
+    for (int i = 0; i < 4; i += 1)
+        if (!param->prog[i]) {
+            param->values[PROGNUMBER] = i + 1;
+            param->prog[i] = true;
+            break;
+        }
+}
+
 void create_param(param_t *param)
 {
     param->values[PROGNUMBER] = 0;

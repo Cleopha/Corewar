@@ -6,10 +6,11 @@
 */
 
 #include "corewar.h"
-#include <string.h> //1 strdup
+#include <string.h> //2 strdup
 
 int is_num(char *str);
 int display_error(char *str);
+void attribute_prognumber(param_t *param);
 
 elem_t *add_elem(char *str, int n, int a, elem_t *actual);
 elem_t *param_list(char *str, int n, int a);
@@ -22,12 +23,12 @@ static int error_progNumber(char *av, int *index, param_t *param)
         if (!av || is_num(av))
             return (display_error("prognumber doit etre un nombre entre 1 et 4"));
         nbProg = getnbr(av);
-        if (0 <= nbProg && nbProg >= 4)
+        if (!(1 <= nbProg && nbProg <= 4))
             return (display_error("prognumber doit etre un nombre entre 1 et 4\n"));
-        if (param->prog[nbProg])
+        if (param->prog[nbProg - 1])
             return (display_error("PROGNUMBER DEJA ASSIGNE\n"));
         param->values[PROGNUMBER] = nbProg;
-        param->prog[nbProg] = true;
+        param->prog[nbProg - 1] = true;
         *index += 1;
         return (0);
     } else
@@ -74,6 +75,8 @@ static int is_champs(char *av, param_t *param, elem_t **ch)
         return (display_error("OUVREPAS\n"));
     if (getline(&buffer, &len, fd) == - 1)
         return (display_error("PAS UN HEADER CHAMPION\n"));
+    if (param->values[PROGNUMBER] == 0)
+        attribute_prognumber(param);
     if (*ch == NULL)
         *ch = param_list(strdup(av), param->values[0], param->values[1]);
     else
