@@ -49,7 +49,7 @@ void create_param(param_t *param)
         param->prog[i] = false;
 }
 
-int is_champs(char *av, param_t *param, elem_t **champs)
+int is_champs(char *av, param_t *param, elem_t **ch)
 {
     FILE *fd = fopen(av, "r+");
     char *buffer = 0;
@@ -63,16 +63,12 @@ int is_champs(char *av, param_t *param, elem_t **champs)
         my_putstr_error("RECUP PAS\n");
         return (1);
     }
-    if (*champs == NULL) {
-        *champs = param_list(strdup(av), param->values[PROGNUMBER], param->values[ADDRESS]);
-        param->values[ADDRESS] = -1;
-        param->values[PROGNUMBER] = 0;
-    }
-    else {
-        *champs = add_elem(strdup(av), param->values[PROGNUMBER], param->values[ADDRESS], *champs);
-        param->values[ADDRESS] = -1;
-        param->values[PROGNUMBER] = 0;
-    }
+    if (*ch == NULL)
+        *ch = param_list(strdup(av), param->values[0], param->values[1]);
+    else
+        *ch = add_elem(strdup(av), param->values[0], param->values[1], *ch);
+    param->values[ADDRESS] = -1;
+    param->values[PROGNUMBER] = 0;
     return (0);
 }
 
