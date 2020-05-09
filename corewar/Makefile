@@ -21,6 +21,7 @@ NAME	=	corewar
 
 SRC	=	src/init_champ.c	\
 		src/error_management.c	\
+		src/my_utils.c	\
 
 MAIN 	=	src/main.c
 
