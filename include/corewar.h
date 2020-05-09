@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 
+#include "champ_struct.h"
 #include "cubee.h"
 #include "corewar_compiler.h"
 #include "corewar_util.h"

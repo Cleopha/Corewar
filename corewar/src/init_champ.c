@@ -5,27 +5,33 @@
 ** init_champ.c
 */
 
-#include "champ_struct.h"
 #include <stdlib.h>
+#include "corewar.h"
+#include <string.h>
 
-champ_t *init_champ(void)
+elem_t *add_elem(char *str, int n, int a, elem_t *actual)
 {
-    champ_t *champ = malloc(sizeof(champ_t));
+    elem_t *node = malloc(sizeof(elem_t));
 
-    champ->prev = NULL;
-    for (int i = 0; i < 3; i++) {
-        champ->instruction_cycles = 0;
-        for (int j = 0; j < 16; j++)
-            champ->reg[j] = 0;
-        champ->n = 0;
-        champ->name = NULL;
-        champ->next = malloc(sizeof(champ_t));
-        champ->next->prev = champ;
-        champ = champ->next;
-    }
-    champ = champ->prev;
-    free(champ->next);
-    champ->next = NULL;
-    for (; champ->prev; champ = champ->prev);
-    return (champ);
+    if (node == NULL)
+        return (NULL);
+    node->next = actual;
+    node->instruction_cycles = 0;
+    node->name = str;
+    node->progNumber = n;
+    node->address = a;
+    for (int i = 0; i < REG_NUMBER; i += 1)
+        node->reg[i] = 0;
+    node->before = NULL;
+    if (actual != NULL)
+        actual->before = node;
+    return (node);
+}
+
+elem_t *param_list(char *str, int n, int a)
+{
+    elem_t *actual = NULL;
+
+    actual = add_elem(str, n, a, actual);
+    return (actual);
 }
