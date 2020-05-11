@@ -18,6 +18,7 @@ typedef struct elem_s {
     char *name;
     int progNumber;
     int address;
+    int nb_bytes;
     struct elem_s *next;
     struct elem_s *before;
 }elem_t;

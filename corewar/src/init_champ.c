@@ -20,6 +20,7 @@ elem_t *add_elem(char *str, int n, int a, elem_t *actual)
     node->name = str;
     node->progNumber = n;
     node->address = a;
+    node->nb_bytes = 0;
     for (int i = 0; i < REG_NUMBER; i += 1)
         node->reg[i] = 0;
     node->before = NULL;
