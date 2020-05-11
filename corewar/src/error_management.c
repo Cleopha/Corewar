@@ -14,8 +14,8 @@ int is_num(char *str);
 int display_error(char *str);
 void attribute_prognumber(param_t *param);
 
-elem_t *add_elem(char *str, int n, int a, elem_t *actual);
-elem_t *param_list(char *str, int n, int a);
+elem_t *add_elem(int n, int a, elem_t *actual);
+elem_t *param_list(int n, int a);
 
 static int error_progNumber(char *av, int *index, param_t *param)
 {
@@ -81,9 +81,9 @@ static int is_champs(char *av, param_t *param, elem_t **ch)
     if (param->values[PROGNUMBER] == 0)
         attribute_prognumber(param);
     if (*ch == NULL)
-        *ch = param_list(strdup(av), param->values[0], param->values[1]);
+        *ch = param_list(param->values[0], param->values[1]);
     else
-        *ch = add_elem(strdup(av), param->values[0], param->values[1], *ch);
+        *ch = add_elem(param->values[0], param->values[1], *ch);
     param->values[ADDRESS] = -1;
     param->values[PROGNUMBER] = 0;
     return (0);

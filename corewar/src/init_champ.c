@@ -9,7 +9,7 @@
 #include "corewar.h"
 #include <string.h>
 
-elem_t *add_elem(char *str, int n, int a, elem_t *actual)
+elem_t *add_elem(int n, int a, elem_t *actual)
 {
     elem_t *node = malloc(sizeof(elem_t));
 
@@ -17,7 +17,7 @@ elem_t *add_elem(char *str, int n, int a, elem_t *actual)
         return (NULL);
     node->next = actual;
     node->instruction_cycles = 0;
-    node->name = str;
+    node->name = NULL;
     node->progNumber = n;
     node->address = a;
     node->nb_bytes = 0;
@@ -29,10 +29,10 @@ elem_t *add_elem(char *str, int n, int a, elem_t *actual)
     return (node);
 }
 
-elem_t *param_list(char *str, int n, int a)
+elem_t *param_list(int n, int a)
 {
     elem_t *actual = NULL;
 
-    actual = add_elem(str, n, a, actual);
+    actual = add_elem(n, a, actual);
     return (actual);
 }
