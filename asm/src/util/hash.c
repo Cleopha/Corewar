@@ -7,7 +7,7 @@
 
 #include "corewar_util.h"
 
-ssize_t strhash(const char *str)
+size_t strhash(const char *str)
 {
     size_t result = 0;
 

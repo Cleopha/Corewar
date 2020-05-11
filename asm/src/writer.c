@@ -7,18 +7,20 @@
 
 #include "corewar_compiler.h"
 
-int write_instructions(inst_t *instructions, const char *filename)
+int write_instructions(compiler_t *compiler, const char *filename)
 {
     int fd = 0;
+    inst_t *current;
 
-    if (!filename || !instructions)
+    if (!filename || !compiler || !compiler->instructions)
         return (84);
     fd = open(filename, O_CREAT | O_RDWR);
     if (fd == -1)
         return (84);
+    current = compiler->instructions;
     do {
-        write(fd, instructions->bytes, instructions->size);
-        instructions = instructions->next;
-    } while (instructions);
+        write(fd, current->bytes, current->size);
+        current = current->next;
+    } while (current);
     return (0);
 }

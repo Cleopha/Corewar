@@ -21,4 +21,5 @@ CMakeLists.txt
 vgcore.*
 **/unit_tests
 corewar/corewar
+asm/asm
 !corewar/

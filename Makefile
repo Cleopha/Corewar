@@ -8,14 +8,17 @@
 all:
 		@make -C ./libs/cubee all
 		@make -C ./asm all
+		@make -C ./corewar all
 
 clean:
 		@make -C ./libs/cubee clean
 		@make -C ./asm clean
+		@make -C ./corewar clean
 
 fclean: clean
 		@make -C ./libs/cubee fclean
 		@make -C ./asm fclean
+		@make -C ./corewar fclean
 
 re:     fclean all
 

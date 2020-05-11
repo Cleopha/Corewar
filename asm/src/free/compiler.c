@@ -9,9 +9,10 @@
 
 #include "corewar_compiler.h"
 
-void free_instructions(inst_t **instructions)
+static void free_instructions(inst_t **instructions)
 {
     inst_t *next;
+
     if (!instructions || !*instructions)
         return;
     do {
@@ -20,4 +21,12 @@ void free_instructions(inst_t **instructions)
         free(*instructions);
         *instructions = next;
     } while(*instructions);
+}
+
+void free_compiler(compiler_t *compiler)
+{
+    if (!compiler)
+        return;
+    free_instructions(&compiler->instructions);
+    cw_flags_clear(compiler);
 }
