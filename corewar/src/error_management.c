@@ -6,6 +6,8 @@
 */
 
 #include "corewar.h"
+#include "vm_struct.h"
+#include "vm_prototypes.h"
 #include <string.h> //2 strdup
 
 int is_num(char *str);
@@ -67,14 +69,15 @@ static int error_dump(char *av, int *index, param_t *param)
 
 static int is_champs(char *av, param_t *param, elem_t **ch)
 {
-    FILE *fd = fopen(av, "r+");
+    int fd = open(av, O_RDONLY);
     char *buffer = 0;
     size_t len = 0;
+    vm_t vm = init_vm();
 
-    if (fd == NULL)
-        return (display_error("OUVREPAS\n"));
-    if (getline(&buffer, &len, fd) == - 1)
-        return (display_error("PAS UN HEADER CHAMPION\n"));
+    if (fd < 0)
+        return (display_error("File can't be opened\n"));
+    if (header_handling(*ch, &vm, fd) == 84)
+        return (84);
     if (param->values[PROGNUMBER] == 0)
         attribute_prognumber(param);
     if (*ch == NULL)

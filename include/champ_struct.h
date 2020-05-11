@@ -23,12 +23,11 @@ typedef struct elem_s {
     struct elem_s *before;
 }elem_t;
 
-typedef enum param_e
-{
+enum param_e {
     PROGNUMBER,
     ADDRESS,
     DUMP,
-}param_e;
+};
 
 typedef struct param_s {
     int values[3];
