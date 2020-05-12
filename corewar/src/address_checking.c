@@ -12,9 +12,12 @@
 int check_memory_zones(elem_t *champ, elem_t *ch)
 {
     while (champ->next && ch) {
+        printf("champ: %d, %d\n", champ->address, champ->header.prog_size);
+        printf("ch: %d, %d\n", ch->address, ch->header.prog_size);
         if (champ->address >= ch->address &&
-            champ->address <= ch->address + ch->header.prog_size)
+            champ->address <= ch->address + ch->header.prog_size) {
             return (1);
+        }
         if (ch->address < champ->address &&
         ch->address < (ch->address + ch->header.prog_size) % MEM_SIZE)
             return (1);
