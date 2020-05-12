@@ -17,6 +17,7 @@ typedef struct elem_s {
     int reg[REG_NUMBER];
     int progNumber;
     int address;
+    int fd;
     bool is_alive;
     struct header_s header;
     struct elem_s *next;

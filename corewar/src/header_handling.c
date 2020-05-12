@@ -15,10 +15,10 @@ int header_handling(elem_t *champ, int fd)
     struct header_s header;
 
     if (read(fd, &header, sizeof(struct header_s)) != sizeof(struct header_s))
-        return (84);
+        return (1);
     header.magic = endian_conversion(header.magic);
     if (header.magic != COREWAR_EXEC_MAGIC)
-        return (84);
+        return (1);
     champ->header = header;
     return (0);
 }

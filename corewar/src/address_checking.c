@@ -14,12 +14,12 @@ int check_memory_zones(elem_t *champ, elem_t *ch)
     while (champ->next && ch) {
         if (champ->address >= ch->address &&
             champ->address <= ch->address + ch->header.prog_size)
-            return (84);
-        if (ch->address < champ->address && ch->address <
-            (ch->address + champ->next->header.prog_size) % MEM_SIZE)
-            return (84);
-        if (check_memory_zones(champ, ch->next) == 84)
-            return (84);
+            return (1);
+        if (ch->address < champ->address &&
+        ch->address < (ch->address + ch->header.prog_size) % MEM_SIZE)
+            return (1);
+        if (check_memory_zones(champ, ch->next))
+            return (1);
         champ = champ->next;
         ch = champ->next;
     }
@@ -28,9 +28,7 @@ int check_memory_zones(elem_t *champ, elem_t *ch)
 
 int fill_mem(vm_t *vm, elem_t *champ, int fd)
 {
-    while (champ->prev)
-        champ = champ->prev;
-    if (check_memory_zones(champ, champ->next) == 84)
-        return (84);
+    if (check_memory_zones(champ, champ->next))
+        return (1);
     return (0);
 }

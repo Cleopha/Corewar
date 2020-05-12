@@ -82,8 +82,8 @@ static int is_champs(char *av, param_t *param, elem_t **ch)
         *ch = param_list(param->values[0], param->values[1]);
     else
         *ch = add_elem(param->values[0], param->values[1], *ch);
-    if (header_handling(*ch, fd) == 84 || fill_mem(&vm, *ch, fd) == 84)
-        return (84);
+    if (header_handling(*ch, fd) || fill_mem(&vm, *ch, fd))
+        return (1);
     param->values[ADDRESS] = -1;
     param->values[PROGNUMBER] = 0;
     return (0);
