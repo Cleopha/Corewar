@@ -76,14 +76,14 @@ static int is_champs(char *av, param_t *param, elem_t **ch)
 
     if (fd < 0)
         return (display_error("File can't be opened\n"));
-    if (header_handling(*ch, &vm, fd) == 84)
-        return (84);
     if (param->values[PROGNUMBER] == 0)
         attribute_prognumber(param);
     if (*ch == NULL)
         *ch = param_list(param->values[0], param->values[1]);
     else
         *ch = add_elem(param->values[0], param->values[1], *ch);
+    if (header_handling(*ch, fd) == 84 || fill_mem(&vm, *ch, fd) == 84)
+        return (84);
     param->values[ADDRESS] = -1;
     param->values[PROGNUMBER] = 0;
     return (0);

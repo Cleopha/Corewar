@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "corewar.h"
 #include <string.h>
+#include "corewar.h"
 
 elem_t *add_elem(int n, int a, elem_t *actual)
 {
@@ -17,15 +17,13 @@ elem_t *add_elem(int n, int a, elem_t *actual)
         return (NULL);
     node->next = actual;
     node->instruction_cycles = 0;
-    node->name = NULL;
     node->progNumber = n;
     node->address = a;
-    node->nb_bytes = 0;
     for (int i = 0; i < REG_NUMBER; i += 1)
         node->reg[i] = 0;
-    node->before = NULL;
+    node->prev = NULL;
     if (actual != NULL)
-        actual->before = node;
+        actual->prev = node;
     return (node);
 }
 
