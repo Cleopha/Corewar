@@ -25,7 +25,8 @@ SRC	=	src/init_champ.c		\
 		src/header_handling.c	\
 		src/mem_init.c			\
 		src/endian_conversion.c	\
-		src/address_checking.c
+		src/address_checking.c	\
+		src/retrieve_int.c
 
 MAIN 	=	src/main.c
 

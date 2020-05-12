@@ -5,6 +5,7 @@
 ** address_checking.c
 */
 
+#include <stdio.h>
 #include "vm_struct.h"
 #include "champ_struct.h"
 #include "vm_prototypes.h"
@@ -12,16 +13,16 @@
 int check_memory_zones(elem_t *champ, elem_t *ch)
 {
     while (champ->next && ch) {
-        printf("champ: %d, %d\n", champ->address, champ->header.prog_size);
-        printf("ch: %d, %d\n", ch->address, ch->header.prog_size);
+        if (champ->address == -1 || ch->address == -1)
+            return (0);
         if (champ->address >= ch->address &&
             champ->address <= ch->address + ch->header.prog_size) {
             return (1);
         }
-        if (ch->address < champ->address &&
+        if (ch->address > champ->address &&
         ch->address < (ch->address + ch->header.prog_size) % MEM_SIZE)
             return (1);
-        if (check_memory_zones(champ, ch->next))
+        if (check_memory_zones(champ, ch->next) == 1)
             return (1);
         champ = champ->next;
         ch = champ->next;
