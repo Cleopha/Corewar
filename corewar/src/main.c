@@ -60,5 +60,6 @@ int main(int ac, char **av)
     for (; champs != NULL; champs = champs->next)
         printf("%d\n", champs->address);
     fill_mem(&vm, champs);
+    print_mem(&vm);
     return (0);
 }

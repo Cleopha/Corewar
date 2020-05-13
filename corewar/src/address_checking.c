@@ -24,7 +24,7 @@ int check_memory_zones(elem_t *champ, elem_t *begin)
 {
     elem_t *ch = begin;
 
-    while (champ->next && ch) {
+    while (ch && champ->next) {
         if (champ == ch)
             return (check_memory_zones(champ, ch->next));
         if (champ->address == -1 || ch->address == -1)
@@ -88,6 +88,10 @@ int fill_with_right_args(vm_t *vm, elem_t *champ)
 
 int fill_mem(vm_t *vm, elem_t *champ)
 {
+    /*while (champ->prev)
+        champ = champ->prev;*/
+    if (check_memory_zones(champ, champ))
+        return (1);
     while (champ) {
         fill_with_right_args(vm, champ);
         close(champ->fd);

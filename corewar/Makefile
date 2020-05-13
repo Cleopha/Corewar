@@ -27,7 +27,9 @@ SRC	=	src/init_champ.c		\
 		src/endian_conversion.c	\
 		src/address_checking.c	\
 		src/retrieve_int.c		\
-		src/error_display.c
+		src/error_display.c		\
+		src/my_put_hexa.c		\
+		src/print_mem.c
 
 MAIN 	=	src/main.c
 

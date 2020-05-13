@@ -19,5 +19,6 @@ int retrieve_int(unsigned char const buffer[], int idx_buff);
 int check_memory_zones(elem_t *champ, elem_t *ch);
 void set_address(elem_t *champ, int nb);
 int champs_nbr_hdl(elem_t const *begin);
+void print_mem(vm_t *vm);
 
 #endif /* !CPE_COREWAR_2019_VM_PROTOTYPES_H */
