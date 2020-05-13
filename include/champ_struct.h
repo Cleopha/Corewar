@@ -11,6 +11,7 @@
 #include <glob.h>
 #include <stdbool.h>
 #include "corewar_operation.h"
+#include "err_management.h"
 
 typedef struct elem_s {
     size_t instruction_cycles;

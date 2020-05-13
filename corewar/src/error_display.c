@@ -6,8 +6,9 @@
 */
 
 #include "err_management.h"
+#include "champ_struct.h"
 
-char const *err[] = {
+char *err[] = {
     "Wrong champions numbers"
     "Prognumber must be between 1 and 4\n",
     "Too much prognumber\n",

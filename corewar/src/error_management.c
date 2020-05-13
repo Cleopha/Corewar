@@ -75,7 +75,7 @@ static int is_champs(char *av, param_t *param, elem_t **ch)
     vm_t vm = init_vm();
 
     if (fd < 0)
-        return (display_error(err[NOP_OPEN]));
+        return (display_error(err[NOT_OPEN]));
     if (param->values[PROGNUMBER] == 0)
         attribute_prognumber(param);
     if (*ch == NULL)
@@ -83,7 +83,6 @@ static int is_champs(char *av, param_t *param, elem_t **ch)
     else
         *ch = add_elem(param->values[0], param->values[1], *ch);
     (*ch)->fd = fd;
-    set_address(*ch);
     if (header_handling(*ch, fd))
         return (1);
     param->values[ADDRESS] = -1;

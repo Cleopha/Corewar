@@ -8,12 +8,13 @@
 #ifndef ERR_MANAGEMENT_H
 #define ERR_MANAGEMENT_H
 
-#include "corewar.h"
+extern char *err[];
 
 enum errors_e
 {
+    TM_CHAMPIONS,
     ERR_PROGNUMBER,
-    TMP_PROGNUMBER,
+    TM_PROGNUMBER,
     ASS_PROGNUMBER,
     POS_ADRESS,
     TM_ADRESS,
@@ -22,3 +23,5 @@ enum errors_e
     NOT_OPEN,
     ERR_HEADER,
 };
+
+#endif
