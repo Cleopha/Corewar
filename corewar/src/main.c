@@ -33,6 +33,7 @@ MEM_SIZE modulo.\n", 568);
 int error(int ac, char **av, elem_t **champs)
 {
     param_t param;
+    int nb = my_list_size(*champs);
 
     create_param(&param);
     if (loop_error(av, &param, champs))
@@ -40,6 +41,10 @@ int error(int ac, char **av, elem_t **champs)
     set_address(*champs);
     if (param.values[PROGNUMBER] != 0 || param.values[ADDRESS] != -1)
         return (display_error("Invalid parameters\n"));
+    if (nb < 2 && nb > 4) {
+        display_error(err[TM_CHAMPIONS]);
+        return (1);
+    }
     return (0);
 }
 

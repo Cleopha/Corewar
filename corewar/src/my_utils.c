@@ -39,3 +39,14 @@ void create_param(param_t *param)
     for (int i = 0; i < 4; i += 1)
         param->prog[i] = false;
 }
+
+int my_list_size(elem_t const *begin)
+{
+    int nb = 1;
+
+    if (begin == NULL)
+        return (0);
+    for (; begin->next != NULL; begin = begin->next)
+        nb += 1;
+    return (nb);
+}

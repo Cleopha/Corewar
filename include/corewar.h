@@ -16,4 +16,6 @@
 #include "corewar_util.h"
 #include "corewar_operation.h"
 
+int my_list_size(elem_t const *begin);
+
 #endif
