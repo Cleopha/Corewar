@@ -18,5 +18,6 @@ const char *err[] = {
     "Dump must be a positive number\n",
     "Too much dump\n",
     "Invalid parameter: not a champion\n",
-    "Not a champion header\n"
+    "Not a champion header\n",
+    "Wrong number of champions, the number of champions must be between 2 and 4"
 };

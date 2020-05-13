@@ -21,6 +21,7 @@ enum errors_e {
     TM_DUMP,
     NOT_OPEN,
     ERR_HEADER,
+    ERR_NBR_CHAMPS,
 };
 
 #endif

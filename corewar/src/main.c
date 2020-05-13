@@ -42,15 +42,11 @@ int error(int ac, char **av, elem_t **champs)
     cpy = *champs;
     nb = my_list_size(*champs);
     if (1 >= nb || 4 < nb)
-        return (display_error("nb champions not valid: pls put nb champions between 2 and 4\n"));
+        return (display_error(err[ERR_NBR_CHAMPS]));
     for (int i = 0; i < nb; i += 1, cpy = cpy->next)
         set_address(cpy, nb);
     if (param.values[PROGNUMBER] != 0 || param.values[ADDRESS] != -1)
         return (display_error("Invalid parameters\n"));
-    if (nb < 2 && nb > 4) {
-        display_error(err[TM_CHAMPIONS]);
-        return (1);
-    }
     return (0);
 }
 
