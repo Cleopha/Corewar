@@ -11,14 +11,13 @@
 #include "vm_prototypes.h"
 #include "union.h"
 
-void set_address(elem_t *champ)
+void set_address(elem_t *champ, int nb_champ)
 {
     static int mem_pos = 0;
-//    int nb_champ = champs_nbr_hdl(champ);
 
     if (champ->address == -1)
         champ->address = mem_pos;
-    //  mem_pos += MEM_SIZE / nb_champ;
+    mem_pos += MEM_SIZE / nb_champ;
 }
 
 int check_memory_zones(elem_t *champ, elem_t *begin)

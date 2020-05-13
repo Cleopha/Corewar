@@ -33,12 +33,18 @@ MEM_SIZE modulo.\n", 568);
 int error(int ac, char **av, elem_t **champs)
 {
     param_t param;
-    int nb = my_list_size(*champs);
+    elem_t *cpy = NULL;
+    int nb = 0;
 
     create_param(&param);
     if (loop_error(av, &param, champs))
         return (1);
-    set_address(*champs);
+    cpy = *champs;
+    nb = my_list_size(*champs);
+    if (1 >= nb || 4 < nb)
+        return (display_error("nb champions not valid: pls put nb champions between 2 and 4\n"));
+    for (int i = 0; i < nb; i += 1, cpy = cpy->next)
+        set_address(cpy, nb);
     if (param.values[PROGNUMBER] != 0 || param.values[ADDRESS] != -1)
         return (display_error("Invalid parameters\n"));
     if (nb < 2 && nb > 4) {
