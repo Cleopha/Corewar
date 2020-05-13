@@ -6,6 +6,7 @@
 */
 
 #include "corewar.h"
+#include "vm_prototypes.h"
 
 void create_param(param_t *param);
 int display_error(char *str);
@@ -28,14 +29,14 @@ MEM_SIZE modulo.\n", 568);
         return (0);
 }
 
-int error(int ac, char **av)
+int error(int ac, char **av, elem_t *champs)
 {
     param_t param;
-    elem_t *champs = NULL;
 
     create_param(&param);
     if (loop_error(av, &param, &champs))
         return (1);
+    set_address(champs);
     if (param.values[PROGNUMBER] != 0 || param.values[ADDRESS] != -1)
         return (display_error("Invalid parameters\n"));
     for (; champs != NULL; champs = champs->next)
@@ -45,7 +46,11 @@ int error(int ac, char **av)
 
 int main(int ac, char **av)
 {
-    if (error(ac, av))
+    vm_t vm = init_vm();
+    elem_t *champs = NULL;
+
+    if (error(ac, av, champs))
         return (1);
+    fill_mem(&vm, champs);
     return (0);
 }

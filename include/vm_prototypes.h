@@ -17,5 +17,7 @@ int header_handling(elem_t *champ, int fd);
 int fill_mem(vm_t *vm, elem_t *champ);
 int retrieve_int(unsigned char const buffer[], int idx_buff);
 int check_memory_zones(elem_t *champ, elem_t *ch);
+void set_address(elem_t *champ);
+int champs_nbr_hdl(elem_t const *begin);
 
 #endif /* !CPE_COREWAR_2019_VM_PROTOTYPES_H */
