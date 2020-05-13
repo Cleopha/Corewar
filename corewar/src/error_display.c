@@ -8,6 +8,7 @@
 #include "err_management.h"
 
 char const *err[] = {
+    "Wrong champions numbers"
     "Prognumber must be between 1 and 4\n",
     "Too much prognumber\n",
     "Prognumber already assigned\n",
@@ -18,3 +19,13 @@ char const *err[] = {
     "Invalid parameter: not a champion\n",
     "Not a champion header\n"
 };
+
+int champs_nbr_hdl(elem_t const *begin)
+{
+    int nb = my_list_size(begin);
+
+    if (nb < 2 && nb > 4) {
+        display_error(err[TM_CHAMPIONS]);
+        return (84);
+    }
+}
