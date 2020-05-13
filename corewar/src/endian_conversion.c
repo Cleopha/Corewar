@@ -5,24 +5,19 @@
 ** endian_conversion.c
 */
 
-#include <stdio.h>
-
-union endian {
-    int nb;
-    char str[sizeof(int)];
-};
+#include "union.h"
 
 int endian_conversion(int nb)
 {
-    union endian endian_nb;
+    union endian endian;
     char c = 0;
 
-    endian_nb.nb = nb;
-    c = endian_nb.str[3];
-    endian_nb.str[3] = endian_nb.str[0];
-    endian_nb.str[0] = c;
-    c = endian_nb.str[2];
-    endian_nb.str[2] = endian_nb.str[1];
-    endian_nb.str[1] = c;
-    return (endian_nb.nb);
+    endian.nb = nb;
+    c = endian.str[3];
+    endian.str[3] = endian.str[0];
+    endian.str[0] = c;
+    c = endian.str[2];
+    endian.str[2] = endian.str[1];
+    endian.str[1] = c;
+    return (endian.nb);
 }

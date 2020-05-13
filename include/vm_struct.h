@@ -12,7 +12,7 @@
 #include "corewar_operation.h"
 
 typedef struct vm_s {
-    char mem[MEM_SIZE];
+    unsigned char mem[MEM_SIZE];
     size_t nb_live;
     size_t cycles_to_die;
     size_t cycle_decrease;
