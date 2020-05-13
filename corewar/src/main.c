@@ -57,9 +57,8 @@ int main(int ac, char **av)
 
     if (error(ac, av, &champs))
         return (1);
-    for (; champs != NULL; champs = champs->next)
-        printf("%d\n", champs->address);
-    fill_mem(&vm, champs);
+    if (fill_mem(&vm, champs))
+        return (1);
     print_mem(&vm);
     return (0);
 }

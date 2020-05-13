@@ -95,6 +95,8 @@ int fill_mem(vm_t *vm, elem_t *champ)
     while (champ) {
         fill_with_right_args(vm, champ);
         close(champ->fd);
+        if (!champ->next)
+            break;
         champ = champ->next;
     }
     return (0);
