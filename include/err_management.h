@@ -8,7 +8,7 @@
 #ifndef ERR_MANAGEMENT_H
 #define ERR_MANAGEMENT_H
 
-extern char *err[];
+extern const char *err[];
 
 enum errors_e
 {

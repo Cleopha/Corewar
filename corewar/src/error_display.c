@@ -8,8 +8,8 @@
 #include "err_management.h"
 #include "champ_struct.h"
 
-char *err[] = {
-    "Wrong champions numbers"
+const char *err[] = {
+    "Wrong champions numbers\n",
     "Prognumber must be between 1 and 4\n",
     "Too much prognumber\n",
     "Prognumber already assigned\n",

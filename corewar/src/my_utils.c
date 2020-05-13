@@ -15,7 +15,7 @@ int is_num(char *str)
     return (0);
 }
 
-int display_error(char *str)
+int display_error(const char *str)
 {
     my_putstr_error(str);
     return (1);

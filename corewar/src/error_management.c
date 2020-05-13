@@ -11,7 +11,7 @@
 #include <string.h> //2 strdup
 
 int is_num(char *str);
-int display_error(char *str);
+int display_error(const char *str);
 void attribute_prognumber(param_t *param);
 
 elem_t *add_elem(int n, int a, elem_t *actual);

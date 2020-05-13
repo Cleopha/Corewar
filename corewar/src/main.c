@@ -9,7 +9,7 @@
 #include "vm_prototypes.h"
 
 void create_param(param_t *param);
-int display_error(char *str);
+int display_error(const char *str);
 
 int loop_error(char **av, param_t *param, elem_t **champs);
 
@@ -47,6 +47,7 @@ int main(int ac, char **av)
     vm_t vm = init_vm();
     elem_t *champs = NULL;
 
+    printf("%s\n", err[NOT_OPEN]);
     if (error(ac, av, &champs))
         return (1);
     for (; champs != NULL; champs = champs->next)
