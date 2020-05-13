@@ -100,6 +100,10 @@
 #define NBR_LIVE 40
 #endif
 
+#ifndef COREWAR_EXEC_MAGIC
+#define COREWAR_EXEC_MAGIC 0xea83f3
+#endif
+
 struct op_s {
     unsigned int hash;
     char *mnemonique;

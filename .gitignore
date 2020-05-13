@@ -13,7 +13,7 @@ cmake-build-debug/
 cmake-build-debug-system/
 CMakeLists.txt
 
-# Binaries files
+## Binaries files
 
 *.o
 *.a
@@ -21,4 +21,10 @@ CMakeLists.txt
 vgcore.*
 **/unit_tests
 corewar/corewar
+asm/asm
 !corewar/
+
+## GDB Temporary files
+
+peda-session-*.txt
+.gdb_history

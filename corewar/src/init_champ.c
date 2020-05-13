@@ -6,10 +6,10 @@
 */
 
 #include <stdlib.h>
-#include "corewar.h"
 #include <string.h>
+#include "corewar.h"
 
-elem_t *add_elem(char *str, int n, int a, elem_t *actual)
+elem_t *add_elem(int n, int a, elem_t *actual)
 {
     elem_t *node = malloc(sizeof(elem_t));
 
@@ -17,21 +17,20 @@ elem_t *add_elem(char *str, int n, int a, elem_t *actual)
         return (NULL);
     node->next = actual;
     node->instruction_cycles = 0;
-    node->name = str;
     node->progNumber = n;
     node->address = a;
     for (int i = 0; i < REG_NUMBER; i += 1)
         node->reg[i] = 0;
-    node->before = NULL;
+    node->prev = NULL;
     if (actual != NULL)
-        actual->before = node;
+        actual->prev = node;
     return (node);
 }
 
-elem_t *param_list(char *str, int n, int a)
+elem_t *param_list(int n, int a)
 {
     elem_t *actual = NULL;
 
-    actual = add_elem(str, n, a, actual);
+    actual = add_elem(n, a, actual);
     return (actual);
 }

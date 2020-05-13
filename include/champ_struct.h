@@ -9,25 +9,26 @@
 #define CPE_COREWAR_2019_CHAMP_STRUCT_H
 
 #include <glob.h>
-#include "corewar_operation.h"
 #include <stdbool.h>
+#include "corewar_operation.h"
 
 typedef struct elem_s {
-    int reg[REG_NUMBER];
     size_t instruction_cycles;
-    char *name;
+    int reg[REG_NUMBER];
     int progNumber;
     int address;
+    int fd;
+    bool is_alive;
+    struct header_s header;
     struct elem_s *next;
-    struct elem_s *before;
+    struct elem_s *prev;
 }elem_t;
 
-typedef enum param_e
-{
+enum param_e {
     PROGNUMBER,
     ADDRESS,
     DUMP,
-}param_e;
+};
 
 typedef struct param_s {
     int values[3];

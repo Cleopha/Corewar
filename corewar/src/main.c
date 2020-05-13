@@ -38,6 +38,7 @@ int error(int ac, char **av)
         return (1);
     if (param.values[PROGNUMBER] != 0 || param.values[ADDRESS] != -1)
         return (display_error("Invalid parameters\n"));
+
     for (; champs != NULL; champs = champs->next)
         printf("%d\n", champs->progNumber);
     return (0);

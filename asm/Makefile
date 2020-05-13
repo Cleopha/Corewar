@@ -1,4 +1,4 @@
-##
+##git reset --hard HEAD~2
 ## EPITECH PROJECT, 2020
 ## Makefile
 ## File description:
@@ -17,18 +17,18 @@ TFLAGS	=	-lcriterion --coverage
 
 NAME	=	asm
 
-COMPILER	:=	./src/
+COMPILER	:=	./src
 PARSER	:=	./src/parser
 
-SRC	=	$(COMPILER)/free/instruction.c		\
+SRC	=	$(COMPILER)/free/compiler.c		\
 		$(COMPILER)/operations.c			\
 		$(COMPILER)/util/hash.c			\
+		$(COMPILER)/util/error.c		\
 		$(COMPILER)/writer.c	\
 
 SRC	+=	$(PARSER)/word_parser.c	\
-		$(PARSER)/check_param.c	\
-		$(PARSER)/convert_in_bin.c	\
-		$(PARSER)/error_management.c	\
+		$(PARSER)/compile_instruction.c	\
+		$(PARSER)/flags_manager.c \
 
 MAIN 	=	src/main.c
 
@@ -48,7 +48,6 @@ endif
 all:	$(NAME)
 
 $(NAME):	$(OBJ)	$(MOBJ)
-		@make -C ../libs/cubee all
 		@gcc $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
 
 clean:
@@ -57,7 +56,6 @@ clean:
 	@rm -f $(OBJ) $(MOBJ)
 
 fclean: clean
-	@make -C ../libs/cubee fclean
 	@echo -e -n "\033[91m[ RM ]\033[0m"
 	@echo " Binary"
 	@rm -f $(NAME)

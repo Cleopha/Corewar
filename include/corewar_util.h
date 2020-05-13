@@ -10,6 +10,8 @@
 
 #include <unistd.h>
 
+#include "cubee.h"
+
 typedef struct info_s
 {
     int index_op;
@@ -18,6 +20,7 @@ typedef struct info_s
     int byte;
 } info_t;
 
-ssize_t strhash(const char *str);
+size_t strhash(const char *str);
+void print_error(const char *file, size_t  line, const char *msg);
 
 #endif

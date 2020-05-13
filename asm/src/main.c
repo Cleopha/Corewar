@@ -10,7 +10,7 @@
 int main(int argc, char **argv)
 {
     FILE *file;
-    inst_t *instructions __attribute__ ((__cleanup__ (free_instructions)));
+    compiler_t compiler __attribute__ ((__cleanup__ (free_compiler))) = {0};
 
     LOG("%s\n", "Welcome in debug mode!");
     if (argc < 2) {
@@ -22,7 +22,9 @@ int main(int argc, char **argv)
         write(2, "Error in function open: No such file or directory.\n", 51);
         return (84);
     }
-    instructions = cw_compile(file);
+    compiler.file_path = argv[1];
+    compiler.file = file;
+    cw_compile(&compiler);
     fclose(file);
-    return (write_instructions(instructions, NULL));
+    return (write_instructions(&compiler, NULL));
 }
