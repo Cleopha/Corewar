@@ -48,7 +48,6 @@ int main(int ac, char **av)
     vm_t vm = init_vm();
     elem_t *champs = NULL;
 
-    printf("%s\n", err[NOT_OPEN]);
     if (error(ac, av, &champs))
         return (1);
     for (; champs != NULL; champs = champs->next)
