@@ -29,18 +29,16 @@ MEM_SIZE modulo.\n", 568);
         return (0);
 }
 
-int error(int ac, char **av, elem_t *champs)
+int error(int ac, char **av, elem_t **champs)
 {
     param_t param;
 
     create_param(&param);
-    if (loop_error(av, &param, &champs))
+    if (loop_error(av, &param, champs))
         return (1);
-    set_address(champs);
+    set_address(*champs);
     if (param.values[PROGNUMBER] != 0 || param.values[ADDRESS] != -1)
         return (display_error("Invalid parameters\n"));
-    for (; champs != NULL; champs = champs->next)
-        printf("%d\n", champs->progNumber);
     return (0);
 }
 
@@ -49,8 +47,10 @@ int main(int ac, char **av)
     vm_t vm = init_vm();
     elem_t *champs = NULL;
 
-    if (error(ac, av, champs))
+    if (error(ac, av, &champs))
         return (1);
+    for (; champs != NULL; champs = champs->next)
+        printf("%d\n", champs->address);
     fill_mem(&vm, champs);
     return (0);
 }
