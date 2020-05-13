@@ -20,6 +20,8 @@ void print_mem(vm_t *vm)
             my_putstr("\t:");
         }
         my_putchar(' ');
+        if (vm->mem[i] < 16)
+            my_putchar('0');
         my_put_hexa_maj((size_t)vm->mem[i]);
     }
     my_putchar('\n');
