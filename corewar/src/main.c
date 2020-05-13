@@ -7,6 +7,7 @@
 
 #include "corewar.h"
 #include "vm_prototypes.h"
+#include "err_management.h"
 
 void create_param(param_t *param);
 int display_error(const char *str);

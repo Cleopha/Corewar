@@ -10,8 +10,7 @@
 
 extern const char *err[];
 
-enum errors_e
-{
+enum errors_e {
     TM_CHAMPIONS,
     ERR_PROGNUMBER,
     TM_PROGNUMBER,

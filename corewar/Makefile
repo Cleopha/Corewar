@@ -26,7 +26,8 @@ SRC	=	src/init_champ.c		\
 		src/mem_init.c			\
 		src/endian_conversion.c	\
 		src/address_checking.c	\
-		src/retrieve_int.c
+		src/retrieve_int.c		\
+		src/error_display.c
 
 MAIN 	=	src/main.c
 
@@ -39,7 +40,7 @@ ifdef DEBUG
 endif
 
 %.o:	%.c
-	-@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< && \
+	-@$(CC) -no-pie $(CFLAGS) $(CPPFLAGS) -c -o $@ $< && \
 	(echo -e "\033[92m[ OK ]\033[0m" $<) || \
 	(echo -e "\033[91m[ NO COMPIL ]\033[0m" $<; exit 1)
 
@@ -47,7 +48,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)	$(MOBJ)
 	@make -s -C ../libs/cubee all
-	@gcc $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
+	@gcc -no-pie $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
 
 clean:
 	@echo -e "\033[91m[ RM ]\033[0m *.o"

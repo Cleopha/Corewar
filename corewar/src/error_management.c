@@ -6,7 +6,6 @@
 */
 
 #include "corewar.h"
-#include "vm_struct.h"
 #include "vm_prototypes.h"
 #include <string.h> //2 strdup
 
@@ -70,9 +69,6 @@ static int error_dump(char *av, int *index, param_t *param)
 static int is_champs(char *av, param_t *param, elem_t **ch)
 {
     int fd = open(av, O_RDONLY);
-    char *buffer = 0;
-    size_t len = 0;
-    vm_t vm = init_vm();
 
     if (fd < 0)
         return (display_error(err[NOT_OPEN]));
