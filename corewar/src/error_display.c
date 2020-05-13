@@ -20,7 +20,7 @@ const char *err[] = {
     "Invalid parameter: not a champion\n",
     "Not a champion header\n"
 };
-
+/*
 int champs_nbr_hdl(elem_t const *begin)
 {
     int nb = my_list_size(begin);
@@ -30,3 +30,4 @@ int champs_nbr_hdl(elem_t const *begin)
         return (84);
     }
 }
+*/
