@@ -21,18 +21,18 @@ static int error_progNumber(char *av, int *index, param_t *param)
 
     if (param->values[PROGNUMBER] == 0) {
         if (!av || is_num(av))
-            return (display_error("prognumber doit etre un nombre entre 1 et 4"));
+            return (display_error(err[ERR_PROGNUMBER]);
         nbProg = getnbr(av);
         if (!(1 <= nbProg && nbProg <= 4))
-            return (display_error("prognumber doit etre un nombre entre 1 et 4\n"));
+            return (display_error(err[ERR_PROGNUMBER]));
         if (param->prog[nbProg - 1])
-            return (display_error("PROGNUMBER DEJA ASSIGNE\n"));
+            return (display_error(err[ASS_PROGNUMBER]));
         param->values[PROGNUMBER] = nbProg;
         param->prog[nbProg - 1] = true;
         *index += 1;
         return (0);
     } else
-        return (display_error("TROP DE PROGNUMBER\n"));
+        return (display_error(err[TM_PROGNUMBER]));
 }
 
 static int error_address(char *av, int *index, param_t *param)
@@ -41,13 +41,13 @@ static int error_address(char *av, int *index, param_t *param)
 
     if (param->values[ADDRESS] == -1) {
         if (!av || is_num(av))
-            return (display_error("adress doit etre un nombre positif\n"));
+            return (display_error(err[POS_ADRESS]));
         address = getnbr(av);
         param->values[ADDRESS] = address;
         *index += 1;
         return (0);
     } else
-        return (display_error("TROP D'ADRESS\n"));
+        return (display_error(err[TM_ADRESS]));
 }
 
 static int error_dump(char *av, int *index, param_t *param)
@@ -56,13 +56,13 @@ static int error_dump(char *av, int *index, param_t *param)
 
     if (param->values[DUMP] == 0) {
         if (!av || is_num(av))
-            return (display_error("DUMP dois etre positif\n"));
+            return (display_error(err[POS_DUMP]));
         dump = getnbr(av);
         param->values[DUMP] = dump;
         *index += 1;
         return (0);
     } else
-        return (display_error("TROP DE DUMP\n"));
+        return (display_error(err[TM_DUMP]));
 }
 
 static int is_champs(char *av, param_t *param, elem_t **ch)
@@ -72,9 +72,9 @@ static int is_champs(char *av, param_t *param, elem_t **ch)
     size_t len = 0;
 
     if (fd == NULL)
-        return (display_error("OUVREPAS\n"));
+        return (display_error(err[NOT_OPEN]));
     if (getline(&buffer, &len, fd) == - 1)
-        return (display_error("PAS UN HEADER CHAMPION\n"));
+        return (display_error(err[ERR_HEADER]));
     if (param->values[PROGNUMBER] == 0)
         attribute_prognumber(param);
     if (*ch == NULL)
