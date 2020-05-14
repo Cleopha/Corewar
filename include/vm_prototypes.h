@@ -18,9 +18,6 @@
 vm_t init_vm(void);
 param_vm_t init_param(void);
 
-size_t endian_swapper(size_t value, size_t size);
-int champs_nbr_hdl(elem_t const *begin);
-
 /*
 ** Retrieve number to give it to endian conversion
 */
@@ -40,5 +37,26 @@ int header_handling(elem_t *champ, int fd);
 void fill_params(vm_t *vm, elem_t *champ, unsigned char buffer[], int *i);
 void print_mem(vm_t *vm);
 int check_memory_zones(elem_t *champ, elem_t *ch);
+
+/*
+** Instructions
+*/
+
+void live(vm_t *vm, elem_t *champs);
+void ld(vm_t *vm, elem_t *champs);
+void st(vm_t *vm, elem_t *champs);
+void add(vm_t *vm, elem_t *champs);
+void sub(vm_t *vm, elem_t *champs);
+void and(vm_t *vm, elem_t *champs);
+void or(vm_t *vm, elem_t *champs);
+void xor(vm_t *vm, elem_t *champs);
+void zjmp(vm_t *vm, elem_t *champs);
+void ldi(vm_t *vm, elem_t *champs);
+void sti(vm_t *vm, elem_t *champs);
+void my_fork(vm_t *vm, elem_t *champs);
+void lld(vm_t *vm, elem_t *champs);
+void lldi(vm_t *vm, elem_t *champs);
+void lfork(vm_t *vm, elem_t *champs);
+void aff(vm_t *vm, elem_t *champs);
 
 #endif /* !CPE_COREWAR_2019_VM_PROTOTYPES_H */
