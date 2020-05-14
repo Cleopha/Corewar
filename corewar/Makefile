@@ -19,19 +19,19 @@ TFLAGS	=	-lcriterion --coverage
 
 NAME	=	corewar
 
-SRC	=	src/init_champ.c		\
-		src/error_management.c	\
-		src/my_utils.c			\
-		src/header_handling.c	\
-		src/mem_init.c			\
-		src/endian_conversion.c	\
-		src/address_checking.c	\
-		src/retrieve_int.c		\
-		src/error_display.c		\
-		src/my_put_hexa.c		\
-		src/print_mem.c			\
-		src/init_param.c		\
-		src/set_params.c
+SRC	=	src/init_champ.c					\
+		src/error_management.c				\
+		src/my_utils.c						\
+		src/memory_init/header_handling.c	\
+		src/memory_init/mem_init.c			\
+		src/endian_conversion.c				\
+		src/memory_init/address_checking.c	\
+		src/retrieve_int.c					\
+		src/error_display.c					\
+		src/my_put_hexa.c					\
+		src/memory_init/print_mem.c			\
+		src/memory_init/init_param.c		\
+		src/memory_init/set_params.c
 
 MAIN 	=	src/main.c
 
