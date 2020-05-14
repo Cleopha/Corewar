@@ -20,6 +20,7 @@ TFLAGS		=	-lcriterion --coverage
 NAME		=	corewar
 
 MEMORY		:=	./src/memory_init
+INSTRUCTION	:=	./src/instruction
 
 SRC			=	src/endian_conversion.c	\
 				src/error_display.c		\
@@ -28,6 +29,23 @@ SRC			=	src/endian_conversion.c	\
 				src/my_put_hexa.c		\
 				src/my_utils.c			\
 				src/retrieve_int.c
+
+SRC			+=	$(INSTRUCTION)/add.c	\
+				$(INSTRUCTION)/aff.c	\
+				$(INSTRUCTION)/and.c	\
+				$(INSTRUCTION)/fork.c	\
+				$(INSTRUCTION)/ld.c	\
+				$(INSTRUCTION)/ldi.c	\
+				$(INSTRUCTION)/lfork.c	\
+				$(INSTRUCTION)/live.c	\
+				$(INSTRUCTION)/lld.c	\
+				$(INSTRUCTION)/lldi.c	\
+				$(INSTRUCTION)/or.c	\
+				$(INSTRUCTION)/st.c	\
+				$(INSTRUCTION)/sti.c	\
+				$(INSTRUCTION)/sub.c	\
+				$(INSTRUCTION)/xor.c	\
+				$(INSTRUCTION)/zjmp.c
 
 SRC			+=	$(MEMORY)/address_checking.c	\
 				$(MEMORY)/header_handling.c		\
