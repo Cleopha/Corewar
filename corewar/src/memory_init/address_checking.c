@@ -13,8 +13,10 @@ void set_address(elem_t *champ, int nb_champ)
 {
     static int mem_pos = 0;
 
-    if (champ->address == -1)
+    if (champ->address == -1) {
         champ->address = mem_pos;
+        champ->pc = champ->address;
+    }
     mem_pos += MEM_SIZE / nb_champ;
 }
 

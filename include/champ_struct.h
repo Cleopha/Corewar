@@ -16,10 +16,11 @@
 typedef struct elem_s {
     size_t instruction_cycles;
     int reg[REG_NUMBER];
-    int progNumber;
+    int prog_number;
     int address;
     int fd;
     bool is_alive;
+    int pc;
     struct header_s header;
     struct elem_s *next;
     struct elem_s *prev;

@@ -15,13 +15,15 @@ elem_t *add_elem(int n, int a, elem_t *actual)
 
     if (node == NULL)
         return (NULL);
+    node->prev = NULL;
     node->next = actual;
     node->instruction_cycles = 0;
-    node->progNumber = n;
+    node->prog_number = n;
     node->address = a;
+    node->is_alive = false;
+    node->pc = 0;
     for (int i = 0; i < REG_NUMBER; i += 1)
         node->reg[i] = 0;
-    node->prev = NULL;
     if (actual != NULL)
         actual->prev = node;
     return (node);
