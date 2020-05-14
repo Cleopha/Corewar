@@ -15,12 +15,6 @@ int is_num(char *str)
     return (0);
 }
 
-int display_error(const char *str)
-{
-    my_putstr_error(str);
-    return (1);
-}
-
 void attribute_prognumber(param_t *param)
 {
     for (int i = 0; i < 4; i += 1)
