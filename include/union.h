@@ -8,9 +8,11 @@
 #ifndef CPE_COREWAR_2019_UNION_H
 #define CPE_COREWAR_2019_UNION_H
 
+#include <stddef.h>
+
 union endian {
-    int nb;
-    char str[sizeof(int)];
+    size_t nb;
+    unsigned char str[sizeof(size_t)];
 };
 
 #endif /* !CPE_COREWAR_2019_UNION_H */

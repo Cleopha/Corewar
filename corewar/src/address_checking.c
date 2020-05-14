@@ -5,11 +5,9 @@
 ** address_checking.c
 */
 
+#include <string.h>
 #include <unistd.h>
-#include "vm_struct.h"
-#include "champ_struct.h"
 #include "vm_prototypes.h"
-#include "union.h"
 
 void set_address(elem_t *champ, int nb_champ)
 {
@@ -43,53 +41,31 @@ int check_memory_zones(elem_t *champ, elem_t *begin)
     return (0);
 }
 
-void fill_params(vm_t *vm, elem_t *champ, unsigned char buffer[], int *i)
-{
-    unsigned char bit = 0;
-    int param_len = 0;
-    int len = 0;
-    union endian endian;
-
-    for (unsigned int j = 0; j < 3; j++) {
-        bit = (buffer[*i] >> ((j - 6) * -1)) & 0b11;
-        if (bit == 0b01) {
-            param_len = 1;
-            vm->mem[champ->address + *i + len] = buffer[*i + len];
-        } else if (bit == 0b10 || bit == 0b11) {
-            param_len = 4;
-            endian.nb = endian_conversion(retrieve_int(buffer, *i + len));
-        } else
-            break;
-        for (int k = 0; param_len != 1 && k < param_len; k++)
-            vm->mem[champ->address + *i + k + len] = endian.str[k];
-        len += param_len;
-    }
-    *i += len;
-}
-
 int fill_with_right_args(vm_t *vm, elem_t *champ)
 {
-    union endian endian;
     unsigned char buffer[champ->header.prog_size];
+    unsigned char inst;
 
+    memset(buffer, 0, champ->header.prog_size);
     if (read(champ->fd, buffer, champ->header.prog_size) !=
     champ->header.prog_size)
         return (1);
-    for (int i = 0; i < champ->header.prog_size; i++) {
-        endian.nb = endian_conversion(retrieve_int(buffer, i));
-        for (int j = 0; j < 4; j++)
-            vm->mem[champ->address + i + j] = endian.str[j];
-        i += 4;
+    for (unsigned int i = 0; i < champ->header.prog_size;) {
         vm->mem[champ->address + i] = buffer[i];
-        fill_params(vm, champ, buffer, &i);
+        inst = vm->mem[champ->address + i];
+        i += 1;
+        if (inst == 1 || inst == 2 || inst == 6 || inst == 7 || inst == 8)
+            vm->dir_size = 4;
+        else
+            vm->dir_size = 2;
+        if (inst != 0x01 && inst != 0x09 && inst != 0x0C && inst != 0x0F)
+            fill_params(vm, champ, buffer, &i);
     }
     return (0);
 }
 
 int fill_mem(vm_t *vm, elem_t *champ)
 {
-    /*while (champ->prev)
-        champ = champ->prev;*/
     if (check_memory_zones(champ, champ))
         return (1);
     while (champ) {

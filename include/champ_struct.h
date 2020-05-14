@@ -8,7 +8,7 @@
 #ifndef CPE_COREWAR_2019_CHAMP_STRUCT_H
 #define CPE_COREWAR_2019_CHAMP_STRUCT_H
 
-#include <glob.h>
+#include <stddef.h>
 #include <stdbool.h>
 #include "corewar_operation.h"
 #include "err_management.h"

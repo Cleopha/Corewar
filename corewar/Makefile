@@ -29,7 +29,9 @@ SRC	=	src/init_champ.c		\
 		src/retrieve_int.c		\
 		src/error_display.c		\
 		src/my_put_hexa.c		\
-		src/print_mem.c
+		src/print_mem.c			\
+		src/init_param.c		\
+		src/set_params.c
 
 MAIN 	=	src/main.c
 

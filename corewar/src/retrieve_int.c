@@ -17,3 +17,15 @@ unsigned int retrieve_int(unsigned char const buffer[], int idx_buf)
     re |= buffer[idx_buf + index];
     return (re);
 }
+
+unsigned short retrieve_short(unsigned char const buffer[], int idx)
+{
+    unsigned int index = 0;
+    unsigned short res = 0;
+
+    res |= buffer[idx + index];
+    res <<= 8u;
+    index += 1;
+    res |= buffer[idx + index];
+    return (res);
+}

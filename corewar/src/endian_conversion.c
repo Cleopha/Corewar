@@ -5,19 +5,35 @@
 ** endian_conversion.c
 */
 
-#include "union.h"
+#include <glob.h>
 
-int endian_conversion(int nb)
+size_t endian_swapper(size_t value, size_t size)
 {
-    union endian endian;
-    char c = 0;
+    size_t result = 0;
+    size_t offset = (size - 1) * 8;
+    size_t mid = size / 2;
+    size_t firs_half = 0xFFu;
+    size_t second_half = 0xFFu;
 
-    endian.nb = nb;
-    c = endian.str[3];
-    endian.str[3] = endian.str[0];
-    endian.str[0] = c;
-    c = endian.str[2];
-    endian.str[2] = endian.str[1];
-    endian.str[1] = c;
-    return (endian.nb);
+    for (size_t i = 0; i < size; i++)
+        second_half *= 0x100;
+    for (int i = 0; i < mid; i++) {
+        result |= (value & firs_half) << offset;
+        result |= (value & second_half) >> offset;
+        offset -= 16;
+        firs_half *= 0x100;
+        second_half /= 0x100;
+    }
+    return (result);
+}
+
+unsigned int endian_swap_int(unsigned int n)
+{
+    return (((n >> 24u) & 0xFFu) | ((n << 8u) & 0x00FF0000u)
+    | ((n >> 8u) & 0xFF00u) | ((n << 24u) & 0xFF000000u));
+}
+
+unsigned short endian_swap_short(unsigned short n)
+{
+    return ((n << 8) | (n >> 8));
 }

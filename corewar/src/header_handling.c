@@ -19,12 +19,12 @@ int header_handling(elem_t *champ, int fd)
         my_putstr_error("Invalid header\n");
         return (1);
     }
-    header.magic = endian_conversion(header.magic);
+    header.magic = endian_swap_int(header.magic);
     if (header.magic != COREWAR_EXEC_MAGIC) {
         my_putstr_error("Magic value missing\n");
         return (1);
     }
-    header.prog_size = endian_conversion(header.prog_size);
+    header.prog_size = endian_swap_int(header.prog_size);
     champ->header = header;
     return (0);
 }
