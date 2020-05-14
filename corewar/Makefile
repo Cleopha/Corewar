@@ -5,7 +5,7 @@
 ## Coline SEGURET's Makefile made the 05/07/2020
 ##
 
-CC			?=	gcc
+CC		?=	gcc
 
 MAKEFLAGS	+=	--no-print-directory
 
@@ -19,19 +19,22 @@ TFLAGS	=	-lcriterion --coverage
 
 NAME	=	corewar
 
-SRC	=	src/init_champ.c					\
-		src/error_management.c				\
-		src/my_utils.c						\
-		src/memory_init/header_handling.c	\
-		src/memory_init/mem_init.c			\
-		src/endian_conversion.c				\
-		src/memory_init/address_checking.c	\
-		src/retrieve_int.c					\
-		src/error_display.c					\
-		src/my_put_hexa.c					\
-		src/memory_init/print_mem.c			\
-		src/memory_init/init_param.c		\
-		src/memory_init/set_params.c
+MEMORY	:=	./src/memory_init
+
+SRC	=	src/endian_conversion.c		\
+		src/error_display.c		\
+		src/error_management.c		\
+		src/init_champ.c		\
+		src/my_put_hexa.c		\
+		src/my_utils.c			\
+		src/retrieve_int.c
+
+SRC	+=	$(MEMORY)/address_checking.c	\
+		$(MEMORY)/header_handling.c	\
+		$(MEMORY)/init_param.c		\
+		$(MEMORY)/mem_init.c		\
+		$(MEMORY)/print_mem.c		\
+		$(MEMORY)/set_params.c
 
 MAIN 	=	src/main.c
 
@@ -52,7 +55,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)	$(MOBJ)
 	@make -s -C ../libs/cubee all
-	@gcc -no-pie $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
+	@$(CC) -no-pie $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
 
 clean:
 	@echo -e "\033[91m[ RM ]\033[0m *.o"

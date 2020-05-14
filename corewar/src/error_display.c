@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2020
-** error_display
+** error_display.c
 ** File description:
-** error_display
+** Coline SEGURET's error_display.c made the 05/14/2020
 */
 
 #include "err_management.h"
