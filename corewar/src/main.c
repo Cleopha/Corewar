@@ -27,7 +27,7 @@ number\nin the parameter order\n-a load_addresssets the next program’s loading
 address. When no address is\nspecified, optimize the addresses so that the \
 processes are as far\naway from each other as possible. The addresses are \
 MEM_SIZE modulo.\n", 568);
-        return (0);
+        return (1);
 }
 
 int error(int ac, char **av, elem_t **champs)
@@ -36,6 +36,9 @@ int error(int ac, char **av, elem_t **champs)
     elem_t *cpy = NULL;
     int nb = 0;
 
+    if (ac == 2 && (tabequals(av[1], "-h", sizeof(char)) ||
+       tabequals(av[1], "--help", sizeof(char))))
+        return (man(av[0], 1));
     create_param(&param);
     if (loop_error(av, &param, champs))
         return (1);
