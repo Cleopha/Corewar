@@ -14,6 +14,7 @@
 typedef struct vm_s {
     unsigned char mem[MEM_SIZE];
     char dir_size;
+    int dump;
     size_t nb_live;
     size_t cycles_to_die;
     size_t cycle_decrease;

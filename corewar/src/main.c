@@ -30,7 +30,7 @@ MEM_SIZE modulo.\n", 568);
         return (1);
 }
 
-int error(int ac, char **av, elem_t **champs)
+int error(int ac, char **av, elem_t **champs, vm_t *vm)
 {
     param_t param;
     elem_t *cpy = NULL;
@@ -50,6 +50,25 @@ int error(int ac, char **av, elem_t **champs)
         set_address(cpy, nb);
     if (param.values[PROGNUMBER] != 0 || param.values[ADDRESS] != -1)
         return (display_error("Invalid parameters\n"));
+    vm->dump = param.values[DUMP];
+    return (0);
+}
+
+int loop_vm(vm_t *vm, elem_t *champs)
+{
+    elem_t const *first = champs;
+
+    while (my_list_size(first) != 1) {
+        for (; champs != NULL; champs = champs->next) {
+            //function instruction;
+            //
+            }
+        if (vm->nb_live == NBR_LIVE) {
+            vm->cycles_to_die -= vm->cycle_decrease;
+            vm->nb_live = 0;
+        }
+        champs = first;
+    }
     return (0);
 }
 
@@ -58,7 +77,7 @@ int main(int ac, char **av)
     vm_t vm = init_vm();
     elem_t *champs = NULL;
 
-    if (error(ac, av, &champs) || fill_mem(&vm, champs))
+    if (error(ac, av, &champs, &vm) || fill_mem(&vm, champs))
         return (1);
     print_mem(&vm);
     return (0);
