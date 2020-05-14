@@ -50,7 +50,7 @@ int fill_with_right_args(vm_t *vm, elem_t *champ)
     if (read(champ->fd, buffer, champ->header.prog_size) !=
     champ->header.prog_size)
         return (1);
-    for (unsigned int i = 0; i < champ->header.prog_size;) {
+    for (int i = 0; i < champ->header.prog_size;) {
         vm->mem[champ->address + i] = buffer[i];
         inst = vm->mem[champ->address + i];
         i += 1;

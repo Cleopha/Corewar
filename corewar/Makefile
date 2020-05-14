@@ -5,42 +5,42 @@
 ## Coline SEGURET's Makefile made the 05/07/2020
 ##
 
-CC		?=	gcc
+CC			?=	gcc
 
 MAKEFLAGS	+=	--no-print-directory
 
-LFLAGS	=	-L../libs -lcubee
+LFLAGS		=	-L../libs -lcubee
 
-CFLAGS	+=	-Wall -Wextra
+CFLAGS		+=	-Wall -Wextra
 
-CPPFLAGS =	-I../include -I../libs/cubee/include
+CPPFLAGS 	=	-I../include -I../libs/cubee/include
 
-TFLAGS	=	-lcriterion --coverage
+TFLAGS		=	-lcriterion --coverage
 
-NAME	=	corewar
+NAME		=	corewar
 
-MEMORY	:=	./src/memory_init
+MEMORY		:=	./src/memory_init
 
-SRC	=	src/endian_conversion.c		\
-		src/error_display.c		\
-		src/error_management.c		\
-		src/init_champ.c		\
-		src/my_put_hexa.c		\
-		src/my_utils.c			\
-		src/retrieve_int.c
+SRC			=	src/endian_conversion.c	\
+				src/error_display.c		\
+				src/error_management.c	\
+				src/init_champ.c		\
+				src/my_put_hexa.c		\
+				src/my_utils.c			\
+				src/retrieve_int.c
 
-SRC	+=	$(MEMORY)/address_checking.c	\
-		$(MEMORY)/header_handling.c	\
-		$(MEMORY)/init_param.c		\
-		$(MEMORY)/mem_init.c		\
-		$(MEMORY)/print_mem.c		\
-		$(MEMORY)/set_params.c
+SRC			+=	$(MEMORY)/address_checking.c	\
+				$(MEMORY)/header_handling.c		\
+				$(MEMORY)/init_param.c			\
+				$(MEMORY)/mem_init.c			\
+				$(MEMORY)/print_mem.c			\
+				$(MEMORY)/set_params.c
 
-MAIN 	=	src/main.c
+MAIN 		=	src/main.c
 
-MOBJ	=	$(MAIN:.c=.o)
+MOBJ		=	$(MAIN:.c=.o)
 
-OBJ	=	$(SRC:.c=.o)
+OBJ			=	$(SRC:.c=.o)
 
 ifdef DEBUG
   CFLAGS += -ggdb3 -DDEBUG
