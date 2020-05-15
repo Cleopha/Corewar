@@ -68,4 +68,10 @@ int get_direct(vm_t *vm, elem_t *champs, int diff);
 int get_index_reg(vm_t *vm, elem_t *champs);
 void set_param_with_byte(unsigned char coding_byte, unsigned char params[4]);
 
+/*
+** Write params in mem
+*/
+
+void ind_write(vm_t *vm, elem_t *champs, int value, int ind);
+
 #endif /* !CPE_COREWAR_2019_VM_PROTOTYPES_H */

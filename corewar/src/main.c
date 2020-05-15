@@ -54,40 +54,6 @@ int error(int ac, char **av, elem_t **champs, vm_t *vm)
     return (0);
 }
 
-int loop_vm(vm_t *vm, elem_t *champs)
-{
-    elem_t *first = champs;
-    void (*inst_ptr[])(vm_t *, elem_t *) = {live, ld, st, add, sub, and, or,
-    xor, zjmp, ldi, sti, my_fork, lld, lldi, lfork, aff};
-    int dump_cp = vm->dump;
-
-    while (my_list_size(first) != 1) {
-        for (; champs != NULL; champs = champs->next) {
-            //function instruction;
-            //
-        }
-        champs = first;
-        vm->dump -= 1;
-        if (vm->dump == 0) {
-            print_mem(vm);
-            vm->dump = dump_cp;
-        }
-        vm->cycles_to_die -= 1;
-        if (vm->cycles_to_die == 0) {
-            vm->cycles_to_die = CYCLE_TO_DIE - (CYCLE_DELTA *
-                                                (int) (vm->nb_live / NBR_LIVE));
-            for (; champs != NULL; champs = champs->next) {
-                if (champs->is_alive)
-                    champs->is_alive = false;
-                /* else */
-                /*     remove_champ(champs); */
-            }
-            champs = first;
-        }
-    }
-    return (0);
-}
-
 int main(int ac, char **av)
 {
     vm_t vm = init_vm();

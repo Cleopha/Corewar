@@ -28,24 +28,26 @@ SRC			=	src/endian_conversion.c	\
 				src/init_champ.c		\
 				src/my_put_hexa.c		\
 				src/my_utils.c			\
-				src/retrieve_int.c
+				src/retrieve_int.c		\
+				src/execution_loop.c	\
+				src/put_nb_in_str.c
 
-SRC			+=	$(INSTRUCTION)/add.c	\
-				$(INSTRUCTION)/aff.c	\
-				$(INSTRUCTION)/and.c	\
-				$(INSTRUCTION)/fork.c	\
+SRC			+=	$(INSTRUCTION)/add.c		\
+				$(INSTRUCTION)/aff.c		\
+				$(INSTRUCTION)/and.c		\
+				$(INSTRUCTION)/fork.c		\
 				$(INSTRUCTION)/get_params.c	\
-				$(INSTRUCTION)/ld.c	\
-				$(INSTRUCTION)/ldi.c	\
-				$(INSTRUCTION)/lfork.c	\
-				$(INSTRUCTION)/live.c	\
-				$(INSTRUCTION)/lld.c	\
-				$(INSTRUCTION)/lldi.c	\
-				$(INSTRUCTION)/or.c	\
-				$(INSTRUCTION)/st.c	\
-				$(INSTRUCTION)/sti.c	\
-				$(INSTRUCTION)/sub.c	\
-				$(INSTRUCTION)/xor.c	\
+				$(INSTRUCTION)/ld.c			\
+				$(INSTRUCTION)/ldi.c		\
+				$(INSTRUCTION)/lfork.c		\
+				$(INSTRUCTION)/live.c		\
+				$(INSTRUCTION)/lld.c		\
+				$(INSTRUCTION)/lldi.c		\
+				$(INSTRUCTION)/or.c			\
+				$(INSTRUCTION)/st.c			\
+				$(INSTRUCTION)/sti.c		\
+				$(INSTRUCTION)/sub.c		\
+				$(INSTRUCTION)/xor.c		\
 				$(INSTRUCTION)/zjmp.c
 
 SRC			+=	$(MEMORY)/address_checking.c	\
