@@ -20,6 +20,7 @@ typedef struct elem_s {
     int address;
     int fd;
     bool is_alive;
+    int index_actual;
     int pc;
     struct header_s header;
     struct elem_s *next;
