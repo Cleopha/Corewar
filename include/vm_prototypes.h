@@ -59,4 +59,13 @@ void lldi(vm_t *vm, elem_t *champs);
 void lfork(vm_t *vm, elem_t *champs);
 void aff(vm_t *vm, elem_t *champs);
 
+/*
+** Get_params
+*/
+
+int get_indirect(vm_t *vm, elem_t *champs);
+int get_direct(vm_t *vm, elem_t *champs, int diff);
+int get_index_reg(vm_t *vm, elem_t *champs);
+void set_param_with_byte(unsigned char coding_byte, unsigned char params[4]);
+
 #endif /* !CPE_COREWAR_2019_VM_PROTOTYPES_H */

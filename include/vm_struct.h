@@ -11,6 +11,17 @@
 #include <stddef.h>
 #include "corewar_operation.h"
 
+enum dir {
+    DIR_INT,
+    DIR_SHORT
+};
+
+enum coding_byte {
+    REG = 1,
+    DIR,
+    IND
+};
+
 typedef struct vm_s {
     unsigned char mem[MEM_SIZE];
     char dir_size;
