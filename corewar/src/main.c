@@ -79,8 +79,8 @@ int loop_vm(vm_t *vm, elem_t *champs)
             for (; champs != NULL; champs = champs->next) {
                 if (champs->is_alive)
                     champs->is_alive = false;
-                else
-                    remove_champ(champs);
+                /* else */
+                /*     remove_champ(champs); */
             }
             champs = first;
         }

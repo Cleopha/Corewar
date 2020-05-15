@@ -5,7 +5,7 @@
 ** Coline SEGURET's get_params.c made the 05/15/2020
 */
 
-#include "vm_struct.h"
+#include "vm_prototypes.h"
 #include "champ_struct.h"
 
 int get_indirect(vm_t *vm, elem_t *champs)
@@ -34,7 +34,7 @@ int get_index_reg(vm_t *vm, elem_t *champs)
 {
     int index = (int)vm->mem[champs->index_actual];
 
-    index_actual->pc += 1;
+    champs->index_actual += 1;
     return (index);
 }
 

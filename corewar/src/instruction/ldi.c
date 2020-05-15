@@ -5,7 +5,7 @@
 ** Coline SEGURET's ldi.c made the 05/15/2020
 */
 
-#include "vm_struct.h"
+#include "vm_prototypes.h"
 #include "champ_struct.h"
 
 void ldi(vm_t *vm, elem_t *champs)
@@ -17,26 +17,26 @@ void ldi(vm_t *vm, elem_t *champs)
     int ind = 0;
 
     champs->instruction_cycles = 25;
-    champs->index_actuals += 1;
-    coding_byte = vm->mem[champs->index_actuals];
+    champs->index_actual += 1;
+    coding_byte = vm->mem[champs->index_actual];
     set_param_with_byte(coding_byte, params);
-    champs->index_actuals += 1;
+    champs->index_actual += 1;
 
-    if (param[0] == REG)
+    if (params[0] == REG)
         value_one = champs->reg[get_index_reg(vm, champs)];
-    else if (param[0] == DIR) {
+    else if (params[0] == DIR) {
         value_one = get_direct(vm, champs, DIR_SHORT);
     }
-    else if (param[0] == IND) {
-        values_one = retrieve_int(vm->mem, champs->pc +
+    else if (params[0] == IND) {
+        value_one = retrieve_int(vm->mem, champs->pc +
         get_indirect(vm, champs) % IDX_MOD);
     }
-    if (param[1] == REG)
+    if (params[1] == REG)
         value_two = champs->reg[get_index_reg(vm, champs)];
-    else if (param[1] == DIR) {
+    else if (params[1] == DIR) {
         value_two = get_direct(vm, champs, DIR_SHORT);
     }
-    ind = values_one + values_two;
+    ind = value_one + value_two;
     champs->reg[get_index_reg(vm, champs)] =
     retrieve_int(vm->mem, champs->pc + ind % IDX_MOD);
     champs->pc = champs->index_actual;

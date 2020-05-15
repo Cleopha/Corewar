@@ -9,7 +9,7 @@
 #include "champ_struct.h"
 #include "cubee.h"
 
-void live(vm_t *vm, elem_t *champs)
+void live( __attribute__((unused))vm_t *vm, elem_t *champs)
 {
     int skip = 2;
 
