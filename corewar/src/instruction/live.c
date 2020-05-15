@@ -14,6 +14,9 @@ void live(vm_t *vm, elem_t *champs)
 
     champs->pc += skip;
     champs->is_alive = true;
-    printf("The player %d (%s) is alive", champs->prog_number, champs->header.prog_name);
-    return;
+    my_putstr("The player ");
+    my_putstr(getnbr(champs->prog_number));
+    my_putstr(" (");
+    my_putstr(champs->header.prog_name);
+    my_putstr(") is alive\n");
 }
