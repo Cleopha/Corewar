@@ -15,6 +15,7 @@ void st(vm_t *vm, elem_t *champs)
     int value = 0;
     int ind = 0;
 
+    champs->instruction_cycles = 5;
     champs->index_actuals += 1;
     coding_byte = vm->mem[champs->index_actuals];
     set_param_with_byte(coding_byte, params);

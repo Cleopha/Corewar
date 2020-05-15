@@ -13,6 +13,7 @@ void live(vm_t *vm, elem_t *champs)
 {
     int skip = 2;
 
+    champs->instruction_cycles = 10;
     champs->pc += skip;
     champs->is_alive = true;
     my_putstr("The player ");

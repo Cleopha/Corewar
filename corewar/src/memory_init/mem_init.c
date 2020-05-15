@@ -16,5 +16,6 @@ vm_t init_vm(void)
         vm.mem[i] = 0;
     vm.nb_live = 0;
     vm.cycles_to_die = CYCLE_TO_DIE;
+    vm.carry = 0;
     return (vm);
 }

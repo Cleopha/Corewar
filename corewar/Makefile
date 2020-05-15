@@ -34,6 +34,7 @@ SRC			+=	$(INSTRUCTION)/add.c	\
 				$(INSTRUCTION)/aff.c	\
 				$(INSTRUCTION)/and.c	\
 				$(INSTRUCTION)/fork.c	\
+				$(INSTRUCTION)/get_params.c	\
 				$(INSTRUCTION)/ld.c	\
 				$(INSTRUCTION)/ldi.c	\
 				$(INSTRUCTION)/lfork.c	\

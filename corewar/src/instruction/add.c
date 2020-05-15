@@ -14,6 +14,7 @@ void add(vm_t *vm, elem_t *champs)
     int values_r1 = 0;
     int values_r2 = 0;
 
+    champs->instruction_cycles = 10;
     champs->index_actual += 2;
     index = get_index_reg(vm, champs);
     values_r1 = champs->reg[index];
