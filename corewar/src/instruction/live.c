@@ -7,6 +7,7 @@
 
 #include "vm_struct.h"
 #include "champ_struct.h"
+#include "cubee.h"
 
 void live(vm_t *vm, elem_t *champs)
 {
@@ -15,7 +16,7 @@ void live(vm_t *vm, elem_t *champs)
     champs->pc += skip;
     champs->is_alive = true;
     my_putstr("The player ");
-    my_putstr(getnbr(champs->prog_number));
+    my_putnbr(champs->prog_number);
     my_putstr(" (");
     my_putstr(champs->header.prog_name);
     my_putstr(") is alive\n");
