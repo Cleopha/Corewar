@@ -52,6 +52,7 @@ static ssize_t parse_line(compiler_t *compiler)
 {
     size_t n = 0;
     char *line __attribute__ ((__cleanup__ (free_str))) = NULL;
+    char *index;
     ssize_t size;
     ssize_t bytes_size = 0;
 
@@ -60,15 +61,14 @@ static ssize_t parse_line(compiler_t *compiler)
     size = getline(&line, &n, compiler->file);
     if (size < 0 || !line)
         return (-3);
-    else if (size < 2)
-        return (0);
-    if (*line == '#')
-        return (0);
     if (line[--size] == '\n')
         line[size] = 0;
-    if (*line == '.')
-        return (cw_parse_header(compiler, line + 1));
-    bytes_size = parse_instruction(compiler, line);
+    for (index = line; *index == ' ' || *index == '\t'; index++);
+    if (size < 2 || *index == '#')
+        return (0);
+    if (*index == '.')
+        return (cw_parse_header(compiler, index + 1));
+    bytes_size = parse_instruction(compiler, index);
     return (bytes_size);
 }
 
