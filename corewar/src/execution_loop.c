@@ -22,21 +22,19 @@ void check_alive_champs(vm_t *vm, elem_t **champs)
     int nb = (int)vm->nb_live / NBR_LIVE;
 
     vm->cycles_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * nb);
-    do {
-        if ((*champs)->is_alive)
-            (*champs)->is_alive = false;
+
+    for (elem_t *current = *champs; current; current = current->next) {
+        if ((current)->is_alive)
+            (current)->is_alive = false;
         else {
-            remove_champ(champs);
+            remove_champ(&current);
             vm->nb_prog -= 1;
         }
-        if ((*champs)->next)
-            *champs = (*champs)->next;
-    } while ((*champs)->next);
-    for (; *champs && (*champs)->prev; *champs = (*champs)->prev);
+    }
 }
 
 void exec_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
-                        elem_t **))
+elem_t **))
 {
     if (vm->mem[(*champs)->pc] > 0 && vm->mem[(*champs)->pc] < 17)
         inst_ptr[vm->mem[(*champs)->pc] - 1](vm, champs);
@@ -45,15 +43,13 @@ void exec_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
 void check_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
                         elem_t **))
 {
-    do {
-        if ((*champs)->instruction_cycles == 0) {
-            exec_champ_inst(vm, champs, inst_ptr);
+    for (elem_t *current = *champs; current; current = current->next) {
+        if ((current)->instruction_cycles == 0) {
+            exec_champ_inst(vm, &current, inst_ptr);
         }
         else
-            (*champs)->instruction_cycles -= 1;
-        if ((*champs)->next)
-            *champs = (*champs)->next;
-    } while ((*champs)->next);
+            (current)->instruction_cycles -= 1;
+    }
 }
 
 int loop_vm(vm_t *vm, elem_t **champs)
@@ -64,6 +60,7 @@ int loop_vm(vm_t *vm, elem_t **champs)
 
     while (vm->nb_prog != 1) {
         check_champ_inst(vm, champs, inst_ptr);
+//        printf("%ld\n", vm->cycles_to_die);
         if (vm->dump >= 0)
             check_dump(vm, dump_cp);
         vm->cycles_to_die -= 1;

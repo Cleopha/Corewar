@@ -30,7 +30,8 @@ void check_param(vm_t *vm, elem_t *champ, int i, param_vm_t *param)
     }
 }
 
-void fill_params(vm_t *vm, elem_t *champ, unsigned char buffer[], int *i)
+void fill_params_with_byte_code(vm_t *vm, elem_t *champ, unsigned char buffer[],
+                                int *i)
 {
     param_vm_t param = init_param();
 
@@ -42,9 +43,31 @@ void fill_params(vm_t *vm, elem_t *champ, unsigned char buffer[], int *i)
         else
             break;
         for (unsigned int k = 0; param.param_len != 1 && k < param.param_len;
-        k++)
+             k++)
             vm->mem[champ->address + *i + k + param.len] = param.en.str[k];
         param.len += param.param_len;
     }
     *i += (int)param.len;
+}
+
+void fill_params(vm_t *vm, elem_t *champ, unsigned char buffer[], int *i)
+{
+    unsigned char inst = buffer[*i - 1];
+    param_vm_t param = init_param();
+
+    if (inst != 0x01 && inst != 0x09 && inst != 0x0C && inst != 0x0F)
+        fill_params_with_byte_code(vm, champ, buffer, i);
+    else {
+        if (inst == 0x01) {
+            vm->dir_size = 4;
+            param.param_len = 4;
+        } else {
+        vm->dir_size = 2;
+        param.param_len = 2;
+        }
+        direct_param(buffer, vm, *i, &param);
+        for (int j = 0; j < param.param_len; j++)
+            vm->mem[*i + champ->address + j] = param.en.str[j];
+        *i += param.param_len;
+    }
 }
