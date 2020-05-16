@@ -24,8 +24,10 @@ void check_alive_champs(vm_t *vm, elem_t **champs)
     for (; *champs != NULL; *champs = (*champs)->next) {
         if ((*champs)->is_alive)
             (*champs)->is_alive = false;
-        else
+        else {
             remove_champ(champs);
+            vm->nb_prog -= 1;
+        }
     }
     for (; *champs && (*champs)->prev; *champs = (*champs)->prev);
 }
@@ -43,6 +45,8 @@ void check_champ_inst(vm_t *vm, elem_t **champs, void (*inst_ptr[])(vm_t *,
     for (; *champs != NULL; *champs = (*champs)->next) {
         if ((*champs)->instruction_cycles == 0)
             exec_champ_inst(vm, champs, inst_ptr);
+        else
+            (*champs)->instruction_cycles -= 1;
     }
 }
 
@@ -52,7 +56,7 @@ int loop_vm(vm_t *vm, elem_t **champs)
     xor, zjmp, ldi, sti, my_fork, lld, lldi, lfork, aff};
     int dump_cp = vm->dump;
 
-    while (my_list_size(*champs) != 1) {
+    while (vm->nb_prog != 1) {
         check_champ_inst(vm, champs, inst_ptr);
         if (vm->dump >= 0)
             check_dump(vm, dump_cp);

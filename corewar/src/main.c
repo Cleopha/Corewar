@@ -34,7 +34,6 @@ int error(int ac, char **av, elem_t **champs, vm_t *vm)
 {
     param_t param;
     elem_t *cpy = NULL;
-    int nb = 0;
 
     if (ac == 2 && (tabequals(av[1], "-h", sizeof(char)) ||
        tabequals(av[1], "--help", sizeof(char))))
@@ -43,11 +42,11 @@ int error(int ac, char **av, elem_t **champs, vm_t *vm)
     if (loop_error(av, &param, champs))
         return (1);
     cpy = *champs;
-    nb = my_list_size(*champs);
-    if (1 >= nb || 4 < nb)
+    vm->nb_prog = my_list_size(*champs);
+    if (1 >= vm->nb_prog || 4 < vm->nb_prog)
         return (display_error(err[ERR_NBR_CHAMPS]));
-    for (int i = 0; i < nb; i += 1, cpy = cpy->next)
-        set_address(cpy, nb);
+    for (int i = 0; i < vm->nb_prog; i += 1, cpy = cpy->next)
+        set_address(cpy, vm->nb_prog);
     if (param.values[PROGNUMBER] != 0 || param.values[ADDRESS] != -1)
         return (display_error("Invalid parameters\n"));
     vm->dump = param.values[DUMP];

@@ -25,6 +25,7 @@ enum coding_byte {
 typedef struct vm_s {
     unsigned char mem[MEM_SIZE];
     char dir_size;
+    int nb_prog;
     int dump;
     int carry;
     size_t nb_live;
