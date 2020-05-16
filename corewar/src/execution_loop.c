@@ -32,7 +32,6 @@ void check_alive_champs(vm_t *vm, elem_t **champs)
         if ((*champs)->next)
             *champs = (*champs)->next;
     } while ((*champs)->next);
-    for (; *champs && (*champs)->prev; *champs = (*champs)->prev);
 }
 
 void exec_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
