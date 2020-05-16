@@ -10,17 +10,12 @@
 void sti(vm_t *vm, elem_t **champs)
 {
     unsigned char params[4] = {0};
-    unsigned char coding_byte = 0;
     int value_reg = 0;
     int value_one = 0;
     int value_two = 0;
     int ind = 0;
 
-    (*champs)->instruction_cycles = 25;
-    (*champs)->index_actual += 1;
-    coding_byte = vm->mem[(*champs)->index_actual];
-    set_param_with_byte(coding_byte, params);
-    (*champs)->index_actual += 1;
+    skip_coding_byte(champs, vm, params, 25);
     value_reg = (*champs)->reg[get_index_reg(vm, champs)];
     if (params[1] == REG)
         value_one = (*champs)->reg[get_index_reg(vm, champs)];

@@ -37,18 +37,16 @@ int get_index_reg(vm_t *vm, elem_t **champs)
     return (index);
 }
 
-void set_carry_flag(int nb, vm_t *vm)
+void get_param(unsigned char params, int *value_one,
+vm_t *vm, elem_t **champs)
 {
-    if (nb == 0)
-        vm->carry = 1;
-    else
-        vm->carry = 0;
-}
-
-void set_param_with_byte(unsigned char coding_byte, unsigned char params[4])
-{
-    params[0] = coding_byte >> 6;
-    params[1] = (coding_byte & 48) >> 4;
-    params[2] = (coding_byte & 12) >> 2;
-    params[3] = (coding_byte & 3);
+    if (params == REG)
+        *value_one = (*champs)->reg[get_index_reg(vm, champs)];
+    else if (params == DIR) {
+        *value_one = get_direct(vm, champs, DIR_INT);
+    }
+    else if (params == IND) {
+        *value_one = retrieve_int(vm->mem, (*champs)->pc +
+        get_indirect(vm, champs) % IDX_MOD);
+    }
 }

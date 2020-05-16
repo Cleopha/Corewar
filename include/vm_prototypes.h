@@ -66,8 +66,17 @@ void aff(vm_t *vm, elem_t **champs);
 int get_indirect(vm_t *vm, elem_t **champs);
 int get_direct(vm_t *vm, elem_t **champs, int diff);
 int get_index_reg(vm_t *vm, elem_t **champs);
+void get_param(unsigned char params, int *value_one,
+vm_t *vm, elem_t **champs);
+
+/*
+** set_begin_instruction
+*/
+
 void set_param_with_byte(unsigned char coding_byte, unsigned char params[4]);
 void set_carry_flag(int nb, vm_t *vm);
+void skip_coding_byte(elem_t **champs, vm_t *vm,
+unsigned char params[4], int nb_inst);
 
 /*
 ** Write params in mem
