@@ -6,7 +6,6 @@
 */
 
 #include "vm_prototypes.h"
-#include "champ_struct.h"
 
 void ldi(vm_t *vm, elem_t **champs)
 {

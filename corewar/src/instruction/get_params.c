@@ -6,7 +6,6 @@
 */
 
 #include "vm_prototypes.h"
-#include "champ_struct.h"
 
 int get_indirect(vm_t *vm, elem_t **champs)
 {

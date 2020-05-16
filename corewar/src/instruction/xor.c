@@ -6,7 +6,6 @@
 */
 
 #include "vm_prototypes.h"
-#include "champ_struct.h"
 
 void xor(vm_t *vm, elem_t **champs)
 {

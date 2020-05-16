@@ -6,7 +6,6 @@
 */
 
 #include "vm_prototypes.h"
-#include "champ_struct.h"
 
 void add(vm_t *vm, elem_t **champs)
 {
