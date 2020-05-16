@@ -19,6 +19,7 @@ void add(vm_t *vm, elem_t **champs)
     values_r1 = (*champs)->reg[index];
     index = get_index_reg(vm, champs);
     values_r2 = (*champs)->reg[index];
+    set_carry_flag(values_r1 + values_r2, vm);
     (*champs)->reg[get_index_reg(vm, champs)] = values_r1 + values_r2;
     (*champs)->pc = (*champs)->index_actual;
 }

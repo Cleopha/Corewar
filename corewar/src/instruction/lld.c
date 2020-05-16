@@ -24,6 +24,7 @@ void lld(vm_t *vm, elem_t **champs)
     else if (params[0] == IND)
         value = retrieve_int(vm->mem, (*champs)->pc +
         get_indirect(vm, champs));
+    set_carry_flag(value, vm);
     (*champs)->reg[get_index_reg(vm, champs)] = value;
     (*champs)->pc = (*champs)->index_actual;
 }

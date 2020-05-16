@@ -37,6 +37,14 @@ int get_index_reg(vm_t *vm, elem_t **champs)
     return (index);
 }
 
+void set_carry_flag(int nb, vm_t *vm)
+{
+    if (nb == 0)
+        vm->carry = 1;
+    else
+        vm->carry = 0;
+}
+
 void set_param_with_byte(unsigned char coding_byte, unsigned char params[4])
 {
     params[0] = coding_byte >> 6;

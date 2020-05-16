@@ -67,6 +67,7 @@ int get_indirect(vm_t *vm, elem_t **champs);
 int get_direct(vm_t *vm, elem_t **champs, int diff);
 int get_index_reg(vm_t *vm, elem_t **champs);
 void set_param_with_byte(unsigned char coding_byte, unsigned char params[4]);
+void set_carry_flag(int nb, vm_t *vm);
 
 /*
 ** Write params in mem

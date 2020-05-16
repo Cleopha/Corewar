@@ -38,6 +38,7 @@ void xor(vm_t *vm, elem_t **champs)
         value_two = retrieve_int(vm->mem, (*champs)->pc +
         get_indirect(vm, champs) % IDX_MOD);
     }
+    set_carry_flag(value_one ^ value_two, vm);
     (*champs)->reg[get_index_reg(vm, champs)] = value_one ^ value_two;
     (*champs)->pc = (*champs)->index_actual;
 }
