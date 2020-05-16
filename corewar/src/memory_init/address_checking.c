@@ -5,9 +5,9 @@
 ** address_checking.c
 */
 
-#include <string.h>
 #include <unistd.h>
 #include "vm_prototypes.h"
+#include "my_memset.h"
 
 void set_address(elem_t *champ, int nb_champ)
 {
@@ -48,7 +48,7 @@ int fill_with_right_args(vm_t *vm, elem_t *champ)
     unsigned char buffer[champ->header.prog_size];
     unsigned char inst;
 
-    memset(buffer, 0, champ->header.prog_size);
+    my_memset(buffer, 0, champ->header.prog_size);
     if (read(champ->fd, buffer, champ->header.prog_size) !=
     champ->header.prog_size)
         return (1);
@@ -60,8 +60,7 @@ int fill_with_right_args(vm_t *vm, elem_t *champ)
             vm->dir_size = 4;
         else
             vm->dir_size = 2;
-        if (inst != 0x01 && inst != 0x09 && inst != 0x0C && inst != 0x0F)
-            fill_params(vm, champ, buffer, &i);
+        fill_params(vm, champ, buffer, &i);
     }
     return (0);
 }

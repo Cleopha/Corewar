@@ -31,7 +31,8 @@ SRC			=	src/endian_conversion.c	\
 				src/retrieve_int.c		\
 				src/execution_loop.c	\
 				src/put_nb_in_str.c		\
-				src/remove_champ.c
+				src/remove_champ.c		\
+				src/my_memset.c
 
 SRC			+=	$(INSTRUCTION)/add.c		\
 				$(INSTRUCTION)/aff.c		\
