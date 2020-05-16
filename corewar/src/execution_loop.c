@@ -53,7 +53,7 @@ void check_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
             (*champs)->instruction_cycles -= 1;
         if ((*champs)->next)
             *champs = (*champs)->next;
-    } while ((*champs)->next)
+    } while ((*champs)->next);
 }
 
 int loop_vm(vm_t *vm, elem_t **champs)
@@ -67,10 +67,6 @@ int loop_vm(vm_t *vm, elem_t **champs)
         if (vm->dump >= 0)
             check_dump(vm, dump_cp);
         vm->cycles_to_die -= 1;
-        //a retirer aprés
-        if (CYCLE_TO_DIE - (CYCLE_DELTA * ((int)vm->nb_live / NBR_LIVE)) < 0)
-            break;
-        //
         if (vm->cycles_to_die == 0)
             check_alive_champs(vm, champs);
     }
