@@ -16,6 +16,7 @@ int live( __attribute__((unused))vm_t *vm, elem_t **champs)
     (*champs)->instruction_cycles = 10;
     (*champs)->index_actual += skip;
     (*champs)->is_alive = true;
+    vm->nb_live += 1;
     my_putstr("The player ");
     my_putnbr((*champs)->prog_number);
     my_putstr(" (");
