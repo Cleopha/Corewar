@@ -45,6 +45,7 @@ SRC			+=	$(INSTRUCTION)/add.c		\
 				$(INSTRUCTION)/lld.c		\
 				$(INSTRUCTION)/lldi.c		\
 				$(INSTRUCTION)/or.c			\
+				$(INSTRUCTION)/set_begin_instruction.c	\
 				$(INSTRUCTION)/st.c			\
 				$(INSTRUCTION)/sti.c		\
 				$(INSTRUCTION)/sub.c		\

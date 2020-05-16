@@ -15,8 +15,8 @@ void lldi(vm_t *vm, elem_t **champs)
     int ind = 0;
 
     skip_coding_byte(champs, vm, params, 50);
-    get_param(params[0], &value_one, vm, champs);
-    get_param(params[1], &value_two, vm, champs);
+    get_param_without_mod(params[0], &value_one, vm, champs);
+    get_param_without_mod(params[1], &value_two, vm, champs);
     ind = value_one + value_two;
     set_carry_flag(ind, vm);
     (*champs)->reg[get_index_reg(vm, champs)] =

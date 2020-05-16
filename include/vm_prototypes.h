@@ -68,7 +68,8 @@ int get_direct(vm_t *vm, elem_t **champs, int diff);
 int get_index_reg(vm_t *vm, elem_t **champs);
 void get_param(unsigned char params, int *value_one,
 vm_t *vm, elem_t **champs);
-
+void get_param_without_mod(unsigned char params, int *value_one,
+vm_t *vm, elem_t **champs);
 /*
 ** set_begin_instruction
 */

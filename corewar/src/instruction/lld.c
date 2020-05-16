@@ -13,7 +13,7 @@ void lld(vm_t *vm, elem_t **champs)
     int value = 0;
 
     skip_coding_byte(champs, vm, params, 10);
-    get_param(params[0], &value, vm, champs);
+    get_param_without_mod(params[0], &value, vm, champs);
     set_carry_flag(value, vm);
     (*champs)->reg[get_index_reg(vm, champs)] = value;
     (*champs)->pc = (*champs)->index_actual;

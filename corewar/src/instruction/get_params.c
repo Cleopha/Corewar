@@ -42,11 +42,23 @@ vm_t *vm, elem_t **champs)
 {
     if (params == REG)
         *value_one = (*champs)->reg[get_index_reg(vm, champs)];
-    else if (params == DIR) {
+    else if (params == DIR)
         *value_one = get_direct(vm, champs, DIR_INT);
-    }
     else if (params == IND) {
         *value_one = retrieve_int(vm->mem, (*champs)->pc +
         get_indirect(vm, champs) % IDX_MOD);
+    }
+}
+
+void get_param_without_mod(unsigned char params, int *value_one,
+vm_t *vm, elem_t **champs)
+{
+    if (params == REG)
+        *value_one = (*champs)->reg[get_index_reg(vm, champs)];
+    else if (params == DIR)
+        *value_one = get_direct(vm, champs, DIR_INT);
+    else if (params == IND) {
+        *value_one = retrieve_int(vm->mem, (*champs)->pc +
+        get_indirect(vm, champs));
     }
 }
