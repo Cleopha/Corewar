@@ -79,7 +79,7 @@ static int is_champs(char *av, param_t *param, elem_t **ch)
     else
         *ch = add_elem(param->values[0], param->values[1], *ch);
     (*ch)->fd = fd;
-    if (header_handling(*ch, fd))
+    if (header_handling(ch, fd))
         return (1);
     param->values[ADDRESS] = -1;
     param->values[PROGNUMBER] = 0;

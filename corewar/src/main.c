@@ -61,6 +61,6 @@ int main(int ac, char **av)
 
     if (error(ac, av, &champs, &vm) || fill_mem(&vm, champs))
         return (1);
-    print_mem(&vm);
+    loop_vm(&vm, &champs);
     return (0);
 }

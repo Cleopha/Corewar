@@ -8,33 +8,33 @@
 #include "vm_prototypes.h"
 #include "champ_struct.h"
 
-int get_indirect(vm_t *vm, elem_t *champs)
+int get_indirect(vm_t *vm, elem_t **champs)
 {
-    int index_values = (int)retrieve_short(vm->mem, champs->index_actual);
+    int index_values = (int)retrieve_short(vm->mem, (*champs)->index_actual);
 
-    champs->index_actual += 2;
+    (*champs)->index_actual += 2;
     return (index_values);
 }
 
-int get_direct(vm_t *vm, elem_t *champs, int diff)
+int get_direct(vm_t *vm, elem_t **champs, int diff)
 {
     int values = 0;
 
     if (diff) {
-        values = retrieve_int(vm->mem, champs->index_actual);
-        champs->index_actual += 4;
+        values = retrieve_int(vm->mem, (*champs)->index_actual);
+        (*champs)->index_actual += 4;
     } else {
-        values = (int)retrieve_short(vm->mem, champs->index_actual);
-        champs->index_actual += 2;
+        values = (int)retrieve_short(vm->mem, (*champs)->index_actual);
+        (*champs)->index_actual += 2;
     }
     return (values);
 }
 
-int get_index_reg(vm_t *vm, elem_t *champs)
+int get_index_reg(vm_t *vm, elem_t **champs)
 {
-    int index = (int)vm->mem[champs->index_actual];
+    int index = (int)vm->mem[(*champs)->index_actual];
 
-    champs->index_actual += 1;
+    (*champs)->index_actual += 1;
     return (index);
 }
 

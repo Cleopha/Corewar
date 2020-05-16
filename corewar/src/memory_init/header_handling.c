@@ -11,7 +11,7 @@
 #include "corewar_operation.h"
 #include "vm_prototypes.h"
 
-int header_handling(elem_t *champ, int fd)
+int header_handling(elem_t **champ, int fd)
 {
     struct header_s header;
 
@@ -25,6 +25,6 @@ int header_handling(elem_t *champ, int fd)
         return (1);
     }
     header.prog_size = endian_swap_int(header.prog_size);
-    champ->header = header;
+    (*champ)->header = header;
     return (0);
 }

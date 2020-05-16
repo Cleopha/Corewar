@@ -33,7 +33,7 @@ unsigned short endian_swap_short(unsigned short n);
 
 void set_address(elem_t *champ, int nb);
 int fill_mem(vm_t *vm, elem_t *champ);
-int header_handling(elem_t *champ, int fd);
+int header_handling(elem_t **champ, int fd);
 void fill_params(vm_t *vm, elem_t *champ, unsigned char buffer[], int *i);
 void print_mem(vm_t *vm);
 int check_memory_zones(elem_t *champ, elem_t *ch);
@@ -42,30 +42,30 @@ int check_memory_zones(elem_t *champ, elem_t *ch);
 ** Instructions
 */
 
-void live(vm_t *vm, elem_t *champs);
-void ld(vm_t *vm, elem_t *champs);
-void st(vm_t *vm, elem_t *champs);
-void add(vm_t *vm, elem_t *champs);
-void sub(vm_t *vm, elem_t *champs);
-void and(vm_t *vm, elem_t *champs);
-void or(vm_t *vm, elem_t *champs);
-void xor(vm_t *vm, elem_t *champs);
-void zjmp(vm_t *vm, elem_t *champs);
-void ldi(vm_t *vm, elem_t *champs);
-void sti(vm_t *vm, elem_t *champs);
-void my_fork(vm_t *vm, elem_t *champs);
-void lld(vm_t *vm, elem_t *champs);
-void lldi(vm_t *vm, elem_t *champs);
-void lfork(vm_t *vm, elem_t *champs);
-void aff(vm_t *vm, elem_t *champs);
+void live(vm_t *vm, elem_t **champs);
+void ld(vm_t *vm, elem_t **champs);
+void st(vm_t *vm, elem_t **champs);
+void add(vm_t *vm, elem_t **champs);
+void sub(vm_t *vm, elem_t **champs);
+void and(vm_t *vm, elem_t **champs);
+void or(vm_t *vm, elem_t **champs);
+void xor(vm_t *vm, elem_t **champs);
+void zjmp(vm_t *vm, elem_t **champs);
+void ldi(vm_t *vm, elem_t **champs);
+void sti(vm_t *vm, elem_t **champs);
+void my_fork(vm_t *vm, elem_t **champs);
+void lld(vm_t *vm, elem_t **champs);
+void lldi(vm_t *vm, elem_t **champs);
+void lfork(vm_t *vm, elem_t **champs);
+void aff(vm_t *vm, elem_t **champs);
 
 /*
 ** Get_params
 */
 
-int get_indirect(vm_t *vm, elem_t *champs);
-int get_direct(vm_t *vm, elem_t *champs, int diff);
-int get_index_reg(vm_t *vm, elem_t *champs);
+int get_indirect(vm_t *vm, elem_t **champs);
+int get_direct(vm_t *vm, elem_t **champs, int diff);
+int get_index_reg(vm_t *vm, elem_t **champs);
 void set_param_with_byte(unsigned char coding_byte, unsigned char params[4]);
 
 /*
@@ -73,5 +73,12 @@ void set_param_with_byte(unsigned char coding_byte, unsigned char params[4]);
 */
 
 void ind_write(vm_t *vm, elem_t *champs, int value, int ind);
+
+/*
+** Running loop
+*/
+
+int loop_vm(vm_t *vm, elem_t **champs);
+void remove_champ(elem_t **champs);
 
 #endif /* !CPE_COREWAR_2019_VM_PROTOTYPES_H */
