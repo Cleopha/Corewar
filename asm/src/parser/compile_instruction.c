@@ -17,27 +17,6 @@ static op_t *get_instruction(const char *instruction)
     return (NULL);
 }
 
-static ssize_t cw_register_flag(compiler_t *compiler, size_t flag_len,
-    char **words)
-{
-    int register_error;
-
-    if (!compiler || !words)
-        return (-2);
-    else if (tablen(words, sizeof(char *)) != 1)
-        return (-1);
-    words[0][flag_len - 1] = 0;
-    register_error = cw_flags_register(compiler, words[0],
-        compiler->current_byte);
-    if (register_error == 0)
-        print_compiler_error(compiler, "Multiple "
-            "definition of the same label.");
-    else
-        cw_flags_queue_compile(compiler, words[0]);
-    words[0][flag_len - 1] = ':';
-    return (0);
-}
-
 static ssize_t cw_write_instruction(compiler_t *compiler, char **bytes,
     char **words)
 {
@@ -56,6 +35,26 @@ static ssize_t cw_write_instruction(compiler_t *compiler, char **bytes,
     return (cw_compile_instruction_param(compiler, bytes, words + 1));
 }
 
+static ssize_t cw_register_flag(compiler_t *compiler, size_t flag_len,
+    char **words, char **bytes)
+{
+    int register_error;
+
+    if (!compiler || !words)
+        return (-2);
+    words[0][flag_len - 1] = 0;
+    register_error = cw_flags_register(compiler, words[0],
+        compiler->current_byte);
+    if (register_error == 0)
+        print_compiler_error(compiler, "Multiple "
+            "definition of the same label.");
+    else
+        cw_flags_queue_compile(compiler, words[0]);
+    words[0][flag_len - 1] = ':';
+    return (words[1] ? cw_write_instruction(compiler, bytes, words + 1)
+        : 0);
+}
+
 ssize_t cw_compile_instruction(compiler_t *compiler, char **bytes,
     char **words)
 {
@@ -65,6 +64,6 @@ ssize_t cw_compile_instruction(compiler_t *compiler, char **bytes,
         return (-2);
     flag_len = tablen(words[0], sizeof(char));
     if (words[0][flag_len - 1] == ':')
-        return (cw_register_flag(compiler, flag_len, words));
+        return (cw_register_flag(compiler, flag_len, words, bytes));
     return (cw_write_instruction(compiler, bytes, words));
 }
