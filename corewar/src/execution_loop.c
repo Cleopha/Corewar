@@ -32,14 +32,14 @@ void check_alive_champs(vm_t *vm, elem_t **champs)
     for (; *champs && (*champs)->prev; *champs = (*champs)->prev);
 }
 
-void exec_champ_inst(vm_t *vm, elem_t **champs, void (*inst_ptr[])(vm_t *,
+void exec_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
                         elem_t **))
 {
     if (vm->mem[(*champs)->pc] > 0 && vm->mem[(*champs)->pc] < 17)
         inst_ptr[vm->mem[(*champs)->pc] - 1](vm, champs);
 }
 
-void check_champ_inst(vm_t *vm, elem_t **champs, void (*inst_ptr[])(vm_t *,
+void check_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
                         elem_t **))
 {
     for (; *champs != NULL; *champs = (*champs)->next) {
@@ -52,7 +52,7 @@ void check_champ_inst(vm_t *vm, elem_t **champs, void (*inst_ptr[])(vm_t *,
 
 int loop_vm(vm_t *vm, elem_t **champs)
 {
-    void (*inst_ptr[])(vm_t *, elem_t **) = {live, ld, st, add, sub, and, or,
+    int (*inst_ptr[])(vm_t *, elem_t **) = {live, ld, st, add, sub, and, or,
     xor, zjmp, ldi, sti, my_fork, lld, lldi, lfork, aff};
     int dump_cp = vm->dump;
 
@@ -64,5 +64,10 @@ int loop_vm(vm_t *vm, elem_t **champs)
         if (vm->cycles_to_die == 0)
             check_alive_champs(vm, champs);
     }
+    my_putstr("The player ");
+    my_putnbr((*champs)->prog_number);
+    my_putstr(" (");
+    my_putstr((*champs)->header.prog_name);
+    my_putstr(") has won.");
     return (0);
 }

@@ -70,9 +70,9 @@ ifdef DEBUG
 endif
 
 %.o:	%.c
-	-@$(CC) -no-pie $(CFLAGS) $(CPPFLAGS) -c -o $@ $< && \
+	@$(CC) -no-pie $(CFLAGS) $(CPPFLAGS) -c -o $@ $< && \
 	(echo -e "\033[92m[ OK ]\033[0m" $<) || \
-	(echo -e "\033[91m[ NO COMPIL ]\033[0m" $<; exit 1)
+	(echo -e "\033[91m[ NO COMPIL ]\033[0m" $<; false)
 
 all:	$(NAME)
 

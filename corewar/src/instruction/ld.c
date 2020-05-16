@@ -7,7 +7,7 @@
 
 #include "vm_prototypes.h"
 
-void ld(vm_t *vm, elem_t **champs)
+int ld(vm_t *vm, elem_t **champs)
 {
     unsigned char params[4] = {0};
     int value = 0;
@@ -17,4 +17,5 @@ void ld(vm_t *vm, elem_t **champs)
     set_carry_flag(value, vm);
     (*champs)->reg[get_index_reg(vm, champs)] = value;
     (*champs)->pc = (*champs)->index_actual;
+    return (0);
 }

@@ -9,7 +9,7 @@
 #include "champ_struct.h"
 #include "cubee.h"
 
-void live( __attribute__((unused))vm_t *vm, elem_t **champs)
+int live( __attribute__((unused))vm_t *vm, elem_t **champs)
 {
     int skip = 2;
 
@@ -21,4 +21,5 @@ void live( __attribute__((unused))vm_t *vm, elem_t **champs)
     my_putstr(" (");
     my_putstr((*champs)->header.prog_name);
     my_putstr(") is alive\n");
+    return (0);
 }

@@ -7,7 +7,7 @@
 
 #include "vm_prototypes.h"
 
-void xor(vm_t *vm, elem_t **champs)
+int xor(vm_t *vm, elem_t **champs)
 {
     unsigned char params[4] = {0};
     int value_one = 0;
@@ -19,4 +19,5 @@ void xor(vm_t *vm, elem_t **champs)
     set_carry_flag(value_one ^ value_two, vm);
     (*champs)->reg[get_index_reg(vm, champs)] = value_one ^ value_two;
     (*champs)->pc = (*champs)->index_actual;
+    return (0);
 }

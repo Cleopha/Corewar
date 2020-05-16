@@ -7,7 +7,7 @@
 
 #include "vm_prototypes.h"
 
-void zjmp(vm_t *vm, elem_t **champs)
+int zjmp(vm_t *vm, elem_t **champs)
 {
     (*champs)->instruction_cycles = 20;
     (*champs)->index_actual += 1;
@@ -16,4 +16,5 @@ void zjmp(vm_t *vm, elem_t **champs)
         get_direct(vm, champs, DIR_SHORT) % IDX_MOD;
     }
     (*champs)->pc = (*champs)->index_actual;
+    return (0);
 }

@@ -7,13 +7,12 @@
 
 #include "vm_prototypes.h"
 
-void sti(vm_t *vm, elem_t **champs)
+int sti(vm_t *vm, elem_t **champs)
 {
     unsigned char params[4] = {0};
     int value_reg = 0;
     int value_one = 0;
     int value_two = 0;
-    int ind = 0;
 
     skip_coding_byte(champs, vm, params, 25);
     value_reg = (*champs)->reg[get_index_reg(vm, champs)];
@@ -21,4 +20,5 @@ void sti(vm_t *vm, elem_t **champs)
     get_param(params[2], &value_two, vm, champs);
     ind_write(vm, *champs, value_reg, value_one + value_two);
     (*champs)->pc = (*champs)->index_actual;
+    return (0);
 }

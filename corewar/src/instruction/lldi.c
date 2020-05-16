@@ -7,7 +7,7 @@
 
 #include "vm_prototypes.h"
 
-void lldi(vm_t *vm, elem_t **champs)
+int lldi(vm_t *vm, elem_t **champs)
 {
     unsigned char params[4] = {0};
     int value_one = 0;
@@ -22,4 +22,5 @@ void lldi(vm_t *vm, elem_t **champs)
     (*champs)->reg[get_index_reg(vm, champs)] =
     retrieve_int(vm->mem, (*champs)->pc + ind);
     (*champs)->pc = (*champs)->index_actual;
+    return (0);
 }
