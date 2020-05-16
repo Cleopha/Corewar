@@ -21,13 +21,19 @@ static ssize_t cw_register_flag(compiler_t *compiler, size_t flag_len,
     char **words)
 {
     int register_error;
-    if (tablen(words, sizeof(char *)) != 1)
+
+    if (!compiler || !words)
+        return (-2);
+    else if (tablen(words, sizeof(char *)) != 1)
         return (-1);
     words[0][flag_len - 1] = 0;
-    register_error = cw_flags_register(compiler, words[0], compiler->current_byte) == 0;
-    if (register_error)
+    register_error = cw_flags_register(compiler, words[0],
+        compiler->current_byte);
+    if (register_error == 0)
         print_compiler_error(compiler, "Multiple "
-                                       "definition of the same label.");
+            "definition of the same label.");
+    else
+        cw_flags_queue_compile(compiler, words[0]);
     words[0][flag_len - 1] = ':';
     return (0);
 }
@@ -35,20 +41,19 @@ static ssize_t cw_register_flag(compiler_t *compiler, size_t flag_len,
 static ssize_t cw_write_instruction(compiler_t *compiler, char **bytes,
     char **words)
 {
-    op_t *instruction;
-
     if (!compiler || !bytes || !words)
-        return (-1);
-    instruction = get_instruction(words[0]);
-    if (!instruction) {
-        my_putstr_error("Unknown instruction !\n");
-        return (-1);
-    }
-    if (tablen(words + 1, sizeof(char *) != instruction->nbr_args)) {
-        my_putstr_error("Invalid argument number.");
+        return (-2);
+    compiler->current_inst = get_instruction(words[0]);
+    if (!compiler->current_inst) {
+        print_compiler_error(compiler, "Unknown instruction.");
         return (-1);
     }
-    return (0);
+    if (tablen(words + 1,sizeof(char *))
+        != (size_t) compiler->current_inst->nbr_args) {
+        print_compiler_error(compiler, "Invalid argument number.");
+        return (-1);
+    }
+    return (cw_compile_instruction_param(compiler, bytes, words + 1));
 }
 
 ssize_t cw_compile_instruction(compiler_t *compiler, char **bytes,
@@ -57,13 +62,9 @@ ssize_t cw_compile_instruction(compiler_t *compiler, char **bytes,
     size_t flag_len;
 
     if (!compiler || !bytes || !words)
-        return (-1);
+        return (-2);
     flag_len = tablen(words[0], sizeof(char));
-    if (words[0][flag_len - 1] == ':') {
-        if (cw_flags_register(compiler, words[0], compiler->current_byte) == 0)
-            print_compiler_error(compiler, "Multiple "
-                "definition of the same label.");
-        return (0);
-    }
+    if (words[0][flag_len - 1] == ':')
+        return (cw_register_flag(compiler, flag_len, words));
     return (cw_write_instruction(compiler, bytes, words));
 }

@@ -9,22 +9,17 @@
 
 int main(int argc, char **argv)
 {
-    FILE *file;
-    compiler_t compiler __attribute__ ((__cleanup__ (free_compiler))) = {0};
+    ssize_t result = 0;
 
     LOG("%s\n", "Welcome in debug mode!");
     if (argc < 2) {
         write(2, "Usage: ./asm file_name[.s] ....\n", 32);
         return (84);
     }
-    file = fopen(argv[1], "r");
-    if (!file) {
-        write(2, "Error in function open: No such file or directory.\n", 51);
-        return (84);
+    for (int i = 1; result >= 0 && i < argc; i++) {
+        result = compile_file(argv[i]);
+        if (result == -2)
+            PRINT_ERROR("Memory Exhausted.");
     }
-    compiler.file_path = argv[1];
-    compiler.file = file;
-    cw_compile(&compiler);
-    fclose(file);
-    return (write_instructions(&compiler, NULL));
+    return (0);
 }

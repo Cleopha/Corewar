@@ -15,12 +15,16 @@ static void free_instructions(inst_t **instructions)
 
     if (!instructions || !*instructions)
         return;
-    do {
+    while (*instructions) {
+        if ((*instructions)->before)
+            (*instructions)->before->next = NULL;
         next = (*instructions)->next;
+        if (next)
+            next->before = NULL;
         free((*instructions)->bytes);
         free(*instructions);
         *instructions = next;
-    } while(*instructions);
+    }
 }
 
 void free_compiler(compiler_t *compiler)
@@ -29,4 +33,7 @@ void free_compiler(compiler_t *compiler)
         return;
     free_instructions(&compiler->instructions);
     cw_flags_clear(compiler);
+    cw_flags_queue_clear(compiler);
+    if (compiler->file)
+        fclose(compiler->file);
 }

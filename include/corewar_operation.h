@@ -8,6 +8,10 @@
 #ifndef _COREWAR_OPERATION_H_
 #define _COREWAR_OPERATION_H_
 
+#ifndef COREWAR_EXEC_MAGIC
+#define COREWAR_EXEC_MAGIC 0xea83f3
+#endif
+
 #ifndef PROG_NAME_LENGTH
 #define PROG_NAME_LENGTH 128
 #endif

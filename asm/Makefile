@@ -21,14 +21,20 @@ COMPILER	:=	./src
 PARSER	:=	./src/parser
 
 SRC	=	$(COMPILER)/free/compiler.c		\
-		$(COMPILER)/operations.c			\
+		$(COMPILER)/operations.c		\
+		$(COMPILER)/compiler.c			\
 		$(COMPILER)/util/hash.c			\
 		$(COMPILER)/util/error.c		\
-		$(COMPILER)/writer.c	\
 
 SRC	+=	$(PARSER)/word_parser.c	\
+		$(PARSER)/header_parser.c \
+		$(PARSER)/value_writer.c \
+		$(PARSER)/instruction_manager.c	\
 		$(PARSER)/compile_instruction.c	\
-		$(PARSER)/flags_manager.c \
+		$(PARSER)/compile_instruction_param.c	\
+		$(PARSER)/param_checker.c	\
+		$(PARSER)/flag_manager.c \
+		$(PARSER)/flag_queue_manager.c \
 
 MAIN 	=	src/main.c
 
@@ -48,6 +54,7 @@ endif
 all:	$(NAME)
 
 $(NAME):	$(OBJ)	$(MOBJ)
+	    @make -s -C ../libs/cubee all
 		@gcc $(OBJ) $(MOBJ) -o $(NAME) $(LFLAGS)
 
 clean:

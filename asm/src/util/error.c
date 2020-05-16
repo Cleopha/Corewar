@@ -26,7 +26,7 @@ void print_error(const char *file, size_t line, const char *msg)
     }
     my_putstr_error(": \033[0m\033[1;36m");
     my_putstr_error(msg ? msg : "Error.");
-    my_putstr_error("\033[0m");
+    my_putstr_error("\033[0m\n");
 }
 
 void print_compiler_error(compiler_t *compiler, const char *msg)
