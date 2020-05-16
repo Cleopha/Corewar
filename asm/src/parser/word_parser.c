@@ -58,9 +58,11 @@ static ssize_t parse_line(compiler_t *compiler)
     if (!compiler || !compiler->file)
         return (-2);
     size = getline(&line, &n, compiler->file);
-    if (size < 2 || !line)
+    if (size < 0 || !line)
         return (-3);
-    else if (*line == '#')
+    else if (size < 2)
+        return (0);
+    if (*line == '#')
         return (0);
     if (line[--size] == '\n')
         line[size] = 0;
