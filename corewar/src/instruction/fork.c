@@ -48,7 +48,7 @@ int my_fork(vm_t *vm, elem_t **champs)
     (*champs)->index_actual += 1;
     set_param_with_byte(vm->mem[(*champs)->index_actual], param);
     if (param[0] == IND)
-        node->address = (*champs)->pc + get_indirect(vm, champs) % IDX_MOD;
+        node->address = ((*champs)->pc + get_indirect(vm, champs)) % IDX_MOD;
     if (node->address > MEM_SIZE || node->address < 0)
         return (1);
     init_forked_prog(champs, &node);

@@ -10,7 +10,6 @@
 int get_indirect(vm_t *vm, elem_t **champs)
 {
     int index_values = (int)retrieve_short(vm->mem, (*champs)->index_actual);
-
     (*champs)->index_actual += 2;
     return (index_values);
 }
@@ -18,7 +17,6 @@ int get_indirect(vm_t *vm, elem_t **champs)
 int get_direct(vm_t *vm, elem_t **champs, int diff)
 {
     int values = 0;
-
     if (diff) {
         values = retrieve_int(vm->mem, (*champs)->index_actual);
         (*champs)->index_actual += 4;
@@ -32,7 +30,6 @@ int get_direct(vm_t *vm, elem_t **champs, int diff)
 int get_index_reg(vm_t *vm, elem_t **champs)
 {
     int index = (int)vm->mem[(*champs)->index_actual];
-
     (*champs)->index_actual += 1;
     return (index);
 }
@@ -44,15 +41,15 @@ vm_t *vm, elem_t **champs)
 
     if (params == REG)
         *value_one = (*champs)->reg[get_index_reg(vm, champs)];
-    else if (params == DIR)
-        *value_one = get_direct(vm, champs, DIR_INT);
-    if (params == IND) {
-        if (inst == 1 || inst == 2 || inst == 7 || inst == 8 || inst == 9)
-            *value_one = retrieve_int(vm->mem, (*champs)->pc +
-            get_indirect(vm, champs) % IDX_MOD);
+    else if (params == DIR) {
+        if (inst == 1 || inst == 2 || inst == 6 || inst == 7 || inst == 8)
+            *value_one = get_direct(vm, champs, DIR_INT);
         else
-            *value_one = retrieve_short(vm->mem, (*champs)->pc +
-            get_indirect(vm, champs) % IDX_MOD);
+            *value_one = get_direct(vm, champs, DIR_SHORT);
+    }
+    if (params == IND) {
+        *value_one = retrieve_int(vm->mem, ((*champs)->pc +
+        get_indirect(vm, champs)) % IDX_MOD);
     }
 }
 
@@ -63,14 +60,14 @@ vm_t *vm, elem_t **champs)
 
     if (params == REG)
         *value_one = (*champs)->reg[get_index_reg(vm, champs)];
-    else if (params == DIR)
-        *value_one = get_direct(vm, champs, DIR_INT);
-    if (params == IND) {
-        if (inst == 1 || inst == 2 || inst == 7 || inst == 8 || inst == 9)
-            *value_one = retrieve_int(vm->mem, (*champs)->pc +
-            get_indirect(vm, champs));
+    else if (params == DIR) {
+        if (inst == 1 || inst == 2 || inst == 6 || inst == 7 || inst == 8)
+            *value_one = get_direct(vm, champs, DIR_INT);
         else
-            *value_one = retrieve_short(vm->mem, (*champs)->pc +
+            *value_one = get_direct(vm, champs, DIR_SHORT);
+    }
+    if (params == IND) {
+            *value_one = retrieve_int(vm->mem, (*champs)->pc +
             get_indirect(vm, champs));
     }
 }

@@ -14,5 +14,5 @@ void ind_write(vm_t *vm, elem_t *champs, int value, int ind)
 
     en.nb = value;
     for (int i = 0; i < 4; i++)
-        vm->mem[champs->pc + ind % IDX_MOD + i] = en.str[i];
+        vm->mem[(champs->pc + ind) % IDX_MOD + i] = en.str[i];
 }

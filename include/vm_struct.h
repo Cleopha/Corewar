@@ -12,8 +12,8 @@
 #include "corewar_operation.h"
 
 enum dir {
+    DIR_SHORT,
     DIR_INT,
-    DIR_SHORT
 };
 
 enum coding_byte {

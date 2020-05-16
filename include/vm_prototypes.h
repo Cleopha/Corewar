@@ -8,6 +8,8 @@
 #ifndef CPE_COREWAR_2019_VM_PROTOTYPES_H
 #define CPE_COREWAR_2019_VM_PROTOTYPES_H
 
+#include <stdio.h>
+
 #include "champ_struct.h"
 #include "vm_struct.h"
 #include "param_struct.h"

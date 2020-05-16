@@ -21,7 +21,7 @@ void check_alive_champs(vm_t *vm, elem_t **champs)
 {
     vm->cycles_to_die = CYCLE_TO_DIE - (CYCLE_DELTA *
     (int) (vm->nb_live / NBR_LIVE));
-    for (; *champs != NULL; *champs = (*champs)->next) {
+    for (; (*champs)->next != NULL; *champs = (*champs)->next) {
         if ((*champs)->is_alive)
             (*champs)->is_alive = false;
         else {
@@ -42,9 +42,10 @@ void exec_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
 void check_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
                         elem_t **))
 {
-    for (; *champs != NULL; *champs = (*champs)->next) {
-        if ((*champs)->instruction_cycles == 0)
+    for (; (*champs)->next != NULL; *champs = (*champs)->next) {
+        if ((*champs)->instruction_cycles == 0) {
             exec_champ_inst(vm, champs, inst_ptr);
+        }
         else
             (*champs)->instruction_cycles -= 1;
     }
