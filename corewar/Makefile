@@ -67,7 +67,7 @@ MOBJ		=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)
 
 ifdef DEBUG
-  CFLAGS += -ggdb3 -DDEBUG
+	CFLAGS += -ggdb3 -DDEBUG
 endif
 
 %.o:	%.c

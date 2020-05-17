@@ -1,4 +1,4 @@
-##git reset --hard HEAD~2
+##
 ## EPITECH PROJECT, 2020
 ## Makefile
 ## File description:
@@ -44,7 +44,7 @@ MOBJ	=	$(MAIN:.c=.o)
 OBJ	=	$(SRC:.c=.o)
 
 ifdef DEBUG
-  CFLAGS += -ggdb3 -DDEBUG
+	CFLAGS += -ggdb3 -DDEBUG
 endif
 
 %.o:	%.c
