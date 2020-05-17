@@ -20,8 +20,7 @@ const char *err[] = {
     "Too much dump\n",
     "Invalid parameter: not a champion\n",
     "Not a champion header\n",
-    "Wrong number of champions,\
- the number of champions must be between 2 and 4\n"
+    "Wrong number of champions, the champion's number must be between 2 and 4\n"
 };
 
 int display_error(const char *str)
