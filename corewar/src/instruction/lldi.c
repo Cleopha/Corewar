@@ -14,7 +14,6 @@ int lldi(vm_t *vm, elem_t *champs)
     int value_two = 0;
     int ind = 0;
 
-    printf("lldi\n");
     skip_coding_byte(champs, vm, params, 50);
     get_param_without_mod(params[0], &value_one, vm, champs);
     get_param_without_mod(params[1], &value_two, vm, champs);

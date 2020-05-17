@@ -9,7 +9,6 @@
 
 int zjmp(vm_t *vm, elem_t *champs)
 {
-    printf("zjmp\n");
     champs->instruction_cycles = 20;
     champs->index_actual += 1;
     if (vm->carry) {

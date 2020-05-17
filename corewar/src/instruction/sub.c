@@ -13,7 +13,6 @@ int sub(vm_t *vm, elem_t *champs)
     int values_r1 = 0;
     int values_r2 = 0;
 
-    printf("sub\n");
     champs->instruction_cycles = 10;
     champs->index_actual += 2;
     index = get_index_reg(vm, champs);

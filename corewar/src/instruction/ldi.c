@@ -14,7 +14,6 @@ int ldi(vm_t *vm, elem_t *champs)
     int value_two = 0;
     int ind = 0;
 
-    printf("ldi\n");
     skip_coding_byte(champs, vm, params, 25);
     get_param(params[0], &value_one, vm, champs);
     get_param(params[1], &value_two, vm, champs);
