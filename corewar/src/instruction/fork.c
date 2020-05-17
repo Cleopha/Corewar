@@ -46,5 +46,7 @@ int my_fork(vm_t *vm, elem_t *champs)
     init_forked_prog(champs, node);
     for (int i = 0; i < node->header.prog_size; i++)
         vm->mem[node->address + i] = vm->mem[champs->address + i];
+    champs->index_actual += 2;
+    champs->pc += 3;
     return (0);
 }
