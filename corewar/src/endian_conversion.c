@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2020
-** CPE_corewar_2019
-** File description:
 ** endian_conversion.c
+** File description:
+** Coline SEGURET's endian_conversion.c made the 05/17/2020
 */
 
 #include <glob.h>
