@@ -35,6 +35,7 @@ int my_fork(vm_t *vm, elem_t *champs)
     elem_t *node = malloc(sizeof(elem_t));
     unsigned char param[4] = {0};
 
+    printf("fork\n");
     champs->index_actual += 1;
     champs->instruction_cycles = 800;
     set_param_with_byte(vm->mem[champs->index_actual], param);

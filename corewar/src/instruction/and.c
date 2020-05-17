@@ -13,6 +13,7 @@ int and(vm_t *vm, elem_t *champs)
     int value_one = 0;
     int value_two = 0;
 
+    printf("and\n");
     skip_coding_byte(champs, vm, params, 6);
     get_param(params[0], &value_one, vm, champs);
     get_param(params[1], &value_two, vm, champs);

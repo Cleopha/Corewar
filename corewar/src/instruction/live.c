@@ -13,6 +13,7 @@ int live( __attribute__((unused))vm_t *vm, elem_t *champs)
 {
     int skip = 5;
 
+    printf("live\n");
     champs->instruction_cycles = 10;
     champs->index_actual += skip;
     champs->is_alive = true;

@@ -12,6 +12,7 @@ int st(vm_t *vm, elem_t *champs)
     unsigned char params[4] = {0};
     int value = 0;
 
+    printf("st\n");
     skip_coding_byte(champs, vm, params, 5);
     value = champs->reg[get_index_reg(vm, champs)];
     if (params[1] == REG)

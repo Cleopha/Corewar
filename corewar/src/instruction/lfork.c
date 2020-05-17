@@ -13,6 +13,7 @@ int lfork(vm_t *vm, elem_t *champs)
     elem_t *node = malloc(sizeof(elem_t));
     unsigned char param[4] = {0};
 
+    printf("lfork\n");
     champs->index_actual += 1;
     champs->instruction_cycles = 1000;
     set_param_with_byte(vm->mem[champs->index_actual], param);
