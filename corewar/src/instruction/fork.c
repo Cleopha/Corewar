@@ -33,14 +33,11 @@ void init_forked_prog(elem_t *champs, elem_t *node)
 int my_fork(vm_t *vm, elem_t *champs)
 {
     elem_t *node = malloc(sizeof(elem_t));
-    unsigned char param[4] = {0};
 
     printf("fork\n");
     champs->index_actual += 1;
     champs->instruction_cycles = 800;
-    set_param_with_byte(vm->mem[champs->index_actual], param);
-    if (param[0] == IND)
-        node->address = (champs->pc + get_indirect(vm, champs)) % IDX_MOD;
+    node->address = (champs->pc + get_indirect(vm, champs)) % IDX_MOD;
     if (node->address > MEM_SIZE || node->address < 0)
         return (1);
     init_forked_prog(champs, node);

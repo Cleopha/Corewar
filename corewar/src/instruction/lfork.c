@@ -11,14 +11,11 @@
 int lfork(vm_t *vm, elem_t *champs)
 {
     elem_t *node = malloc(sizeof(elem_t));
-    unsigned char param[4] = {0};
 
     printf("lfork\n");
     champs->index_actual += 1;
     champs->instruction_cycles = 1000;
-    set_param_with_byte(vm->mem[champs->index_actual], param);
-    if (param[0] == IND)
-        node->address = champs->pc + get_indirect(vm, champs);
+    node->address = champs->pc + get_indirect(vm, champs);
     if (node->address > MEM_SIZE || node->address < 0)
         return (1);
     init_forked_prog(champs, node);
