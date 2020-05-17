@@ -55,7 +55,7 @@ static size_t write_code_dest(compiler_t *compiler, char *file_path)
 
     if (!compiler || !file_path)
         return (-2);
-    fd = open(file_path, O_CREAT | O_RDWR, 0666);
+    fd = open(file_path, O_CREAT | O_RDWR | O_TRUNC, 0666);
     if (fd == -1) {
         print_error(compiler->file_path, 0, "Cant create binary file.");
         return (-1);
