@@ -44,7 +44,8 @@ ssize_t direct_checker(compiler_t *compiler, char type, const char *word)
         return (-2);
     if (*word == LABEL_CHAR) {
         checker_result = label_checker(compiler, type, word + 1);
-        return (!checker_result ? DIR_SIZE : checker_result);
+        return (!checker_result ? GET_DIRECT_SIZE(compiler->current_inst->code)
+            : checker_result);
     }
     if (word[0] == '+' || word[0] == '-')
         word++;
