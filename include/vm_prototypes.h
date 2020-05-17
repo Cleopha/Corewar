@@ -100,6 +100,6 @@ void ind_write(vm_t *vm, elem_t *champs, int value, int ind);
 */
 
 int loop_vm(vm_t *vm, elem_t *champs);
-void remove_champ(elem_t **champs);
+elem_t *remove_champ(elem_t **champs);
 
 #endif /* !CPE_COREWAR_2019_VM_PROTOTYPES_H */

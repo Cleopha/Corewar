@@ -8,12 +8,12 @@
 #include <stdlib.h>
 #include "champ_struct.h"
 
-void remove_champ(elem_t **champs)
+elem_t *remove_champ(elem_t **champs)
 {
     elem_t *copy = *champs;
 
     if (champs == NULL)
-        return;
+        return (NULL);
     if (copy->next)
         copy->next->prev = copy->prev;
     if (copy->prev)
@@ -26,4 +26,5 @@ void remove_champ(elem_t **champs)
         *champs = NULL;
     free(copy);
     copy = NULL;
+    return (*champs);
 }
