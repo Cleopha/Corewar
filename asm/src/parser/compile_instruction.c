@@ -51,7 +51,7 @@ static ssize_t cw_register_flag(compiler_t *compiler, size_t flag_len,
             "definition of the same label.");
         return (-1);
      } else
-        cw_flags_queue_compile(compiler, words[0]);
+         cw_flags_queue_compile(compiler, words[0]);
     words[0][flag_len - 1] = ':';
     return (words[1] ? cw_write_instruction(compiler, bytes, words + 1)
         : 0);

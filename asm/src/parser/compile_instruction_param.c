@@ -23,7 +23,7 @@ static ssize_t cw_get_instruction_param_length(compiler_t *compiler, char type,
         return (-2);
     *param_byte = *param_byte << 2;
     if (word[0] == DIRECT_CHAR) {
-        size_param = direct_checker(compiler, type,word + 1);
+        size_param = direct_checker(compiler, type, word + 1);
         *param_byte = *param_byte | 2;
     } else if (word[0] == 'r') {
         size_param = register_checker(compiler, type, word + 1);

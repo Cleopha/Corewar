@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 #include "vm_prototypes.h"
-#include <string.h> //2 strdup
+#include <string.h>
 
 int is_num(char *str);
 int display_error(const char *str);
