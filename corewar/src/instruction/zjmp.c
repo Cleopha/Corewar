@@ -14,7 +14,8 @@ int zjmp(vm_t *vm, elem_t *champs)
     if (champs->carry) {
         champs->index_actual = (champs->pc +
         get_direct(vm, champs, DIR_SHORT)) % IDX_MOD;
-    }
+    } else
+        champs->index_actual += 2;
     champs->pc = champs->index_actual;
     return (0);
 }
