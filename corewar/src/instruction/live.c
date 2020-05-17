@@ -9,13 +9,13 @@
 #include "champ_struct.h"
 #include "cubee.h"
 
-int live( __attribute__((unused))vm_t *vm, elem_t *champs)
+int live(vm_t *vm, elem_t *champs)
 {
     int skip = 5;
 
     champs->instruction_cycles = 10;
     champs->index_actual += skip;
-    champs->is_alive = true;
+    vm->is_alive[champs->prog_number - 1] = true;
     vm->nb_live += 1;
     my_putstr("The player ");
     my_putnbr(champs->prog_number);

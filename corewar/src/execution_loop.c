@@ -23,8 +23,8 @@ void check_alive_champs(vm_t *vm, elem_t **champs)
 
     vm->cycles_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * nb);
     for (elem_t *current = *champs; current; current = (current)->next) {
-        if ((current)->is_alive) {
-            (current)->is_alive = false;
+        if (vm->is_alive[current->prog_number - 1]) {
+            vm->is_alive[current->prog_number - 1] = false;
         }
         else if (vm->nb_prog > 1) {
             *champs = remove_champ(&current);

@@ -9,6 +9,7 @@
 #define CPE_COREWAR_2019_VM_STRUCT_H
 
 #include <stddef.h>
+#include <stdbool.h>
 #include "corewar_operation.h"
 
 enum dir {
@@ -24,6 +25,7 @@ enum coding_byte {
 
 typedef struct vm_s {
     unsigned char mem[MEM_SIZE];
+    bool is_alive[4];
     char dir_size;
     int nb_prog;
     int dump;
