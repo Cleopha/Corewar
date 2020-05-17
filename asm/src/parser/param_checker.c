@@ -46,7 +46,7 @@ ssize_t direct_checker(compiler_t *compiler, char type, const char *word)
         checker_result = label_checker(compiler, type, word + 1);
         return (!checker_result ? DIR_SIZE : checker_result);
     }
-    if (word[0] == '+' || word[1] == '-')
+    if (word[0] == '+' || word[0] == '-')
         word++;
     if (!(type & T_DIR) || !str_contain_only(word, "0123456789")) {
         print_compiler_error(compiler, "The argument "
