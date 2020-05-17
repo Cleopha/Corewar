@@ -20,6 +20,12 @@ fclean: clean
 		@make -C ./asm fclean
 		@make -C ./corewar fclean
 
+tests_run:
+		@make -C ./libs/cubee tests_run
+
+coverage:
+		@make -C ./libs/cubee coverage
+
 re:     fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re tests_run coverage
