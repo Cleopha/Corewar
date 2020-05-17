@@ -22,6 +22,7 @@ typedef struct elem_s {
     bool is_alive;
     int index_actual;
     int pc;
+    bool carry;
     struct header_s header;
     struct elem_s *next;
     struct elem_s *prev;

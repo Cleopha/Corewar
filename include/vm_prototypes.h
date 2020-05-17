@@ -78,7 +78,7 @@ vm_t *vm, elem_t *champs);
 */
 
 void set_param_with_byte(unsigned char coding_byte, unsigned char params[4]);
-void set_carry_flag(int nb, vm_t *vm);
+void set_carry_flag(int nb, elem_t *champs);
 void skip_coding_byte(elem_t *champs, vm_t *vm,
 unsigned char params[4], int nb_inst);
 

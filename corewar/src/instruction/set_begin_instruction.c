@@ -7,12 +7,12 @@
 
 #include "vm_prototypes.h"
 
-void set_carry_flag(int nb, vm_t *vm)
+void set_carry_flag(int nb, elem_t *champs)
 {
     if (nb == 0)
-        vm->carry = 1;
+        champs->carry = 1;
     else
-        vm->carry = 0;
+        champs->carry = 0;
 }
 
 void set_param_with_byte(unsigned char coding_byte, unsigned char params[4])

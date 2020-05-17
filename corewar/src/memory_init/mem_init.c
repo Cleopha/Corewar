@@ -18,7 +18,6 @@ vm_t init_vm(void)
         vm.is_alive[i] = false;
     vm.nb_live = 0;
     vm.cycles_to_die = CYCLE_TO_DIE;
-    vm.carry = 0;
     vm.nb_prog = 0;
     return (vm);
 }

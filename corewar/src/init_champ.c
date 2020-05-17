@@ -23,6 +23,7 @@ elem_t *add_elem(int n, int a, elem_t *actual)
     node->is_alive = false;
     node->pc = 0;
     node->index_actual = 0;
+    node->carry = 0;
     for (int i = 0; i < REG_NUMBER; i += 1)
         node->reg[i] = 0;
     if (actual != NULL)

@@ -29,7 +29,6 @@ typedef struct vm_s {
     char dir_size;
     int nb_prog;
     int dump;
-    int carry;
     size_t nb_live;
     size_t cycles_to_die;
 } vm_t;

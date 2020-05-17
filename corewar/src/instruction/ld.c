@@ -14,7 +14,7 @@ int ld(vm_t *vm, elem_t *champs)
 
     skip_coding_byte(champs, vm, params, 5);
     get_param(params[0], &value, vm, champs);
-    set_carry_flag(value, vm);
+    set_carry_flag(value, champs);
     champs->reg[get_index_reg(vm, champs)] = value;
     champs->pc = champs->index_actual;
     return (0);
