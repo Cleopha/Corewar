@@ -40,7 +40,7 @@ static ssize_t open_source_file(compiler_t *compiler, char *file_path)
 {
     if (!compiler || !file_path)
         return (-2);
-    compiler->file = fopen(file_path, "r");
+    compiler->file = fopen(file_path, "r+");
     if (!compiler->file) {
         print_error(file_path, 0, "No such file or directory.");
         return (-1);
