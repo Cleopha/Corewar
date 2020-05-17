@@ -38,17 +38,17 @@ int cw_flags_queue_compile(compiler_t *compiler, char *flags)
     ssize_t location = cw_flags_location(compiler, flags);
     flag_queue_t *current;
     flag_queue_t *remove;
-    size_t size;
     int value;
 
     if (location < 0)
         return ((int) location);
     current = cw_flags_queue_get(compiler->flags_queue, strhash(flags));
     while (current) {
-        size = GET_DIRECT_SIZE(current->instruction->code);
-        value = (size == 2) ? ((short) (location - current->location))
+        value = (current->value_size == 2)
+            ? ((short) (location - current->location))
             : ((int) (location - current->location));
-        cw_write_inv_endian(current->flag_ptr, (char *) &value, size);
+        cw_write_inv_endian(current->flag_ptr, (char *) &value,
+            current->value_size);
         remove = current;
         current = cw_flags_queue_get(current->next, hash);
         cw_flags_queue_remove(compiler, remove);
@@ -56,8 +56,8 @@ int cw_flags_queue_compile(compiler_t *compiler, char *flags)
     return (0);
 }
 
-int cw_flags_queue_register(compiler_t *compiler, char *flag, size_t loc,
-    char *flag_ptr)
+int cw_flags_queue_register(compiler_t *compiler, char *flag, char *flag_ptr,
+    size_t value_size)
 {
     size_t hash;
     flag_queue_t *registered;
@@ -70,8 +70,9 @@ int cw_flags_queue_register(compiler_t *compiler, char *flag, size_t loc,
         return (-2);
     if (compiler->flags_queue)
         compiler->flags_queue->before = registered;
-    *registered = (flag_queue_t) {hash, loc, compiler->current_line,
-        flag_ptr, compiler->current_inst, NULL, compiler->flags_queue};
+    *registered = (flag_queue_t) {hash, compiler->current_byte,
+        compiler->current_line, flag_ptr, value_size, NULL,
+        compiler->flags_queue};
     compiler->flags_queue = registered;
     return (0);
 }

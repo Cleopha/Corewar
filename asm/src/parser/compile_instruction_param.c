@@ -7,13 +7,6 @@
 
 #include "corewar_compiler.h"
 
-static void cw_fix_param_byte(op_t *inst, char *param_byte)
-{
-    if (!inst || !param_byte)
-        return;
-    *param_byte = *param_byte << (2 * (MAX_ARGS_NUMBER - inst->nbr_args));
-}
-
 static ssize_t cw_get_instruction_param_length(compiler_t *compiler, char type,
     const char *word, char *param_byte)
 {
@@ -54,26 +47,39 @@ static ssize_t cw_get_instruction_length(compiler_t *compiler, char **words,
     return (size_param >= 0 ? size : size_param);
 }
 
+static ssize_t cw_write_instruction_label(compiler_t *compiler, char *byte,
+    char *word, ssize_t value_size)
+{
+    if (!compiler || !byte || !word)
+        return (-2);
+    if (*word == '%')
+        word++;
+    if (*word == ':')
+        word++;
+    return (cw_flags_compile(compiler, word, byte, value_size));
+}
+
 static ssize_t cw_write_instruction_param(compiler_t *compiler, char *byte,
     char *word)
 {
-    ssize_t size = GET_DIRECT_SIZE(compiler->current_inst->code);
+    ssize_t size;
     int value;
 
     if (!compiler || !byte || !word)
         return (-2);
-    if (word[0] == DIRECT_CHAR && (size != 2 || word[1] == LABEL_CHAR)) {
-        if (word[1] == LABEL_CHAR)
-            return (cw_flags_compile(compiler, word + 2, byte));
-        else
-            value = my_atoi(word + 1);
-    } else if (word[0] == 'r') {
+    size = word[0] == ':' ? 2
+        : GET_DIRECT_SIZE(compiler->current_inst->code);
+    if (word[0] == LABEL_CHAR
+        || (word[0] == DIRECT_CHAR && word[1] == LABEL_CHAR))
+        return (cw_write_instruction_label(compiler, byte, word, size));
+    if (word[0] == 'r')
         size = 1;
-        value = (char) my_atoi(word + 1);
-    } else {
+    else if (word[0] != '%') {
         size = 2;
-        value = (short) my_atoi(word + (word[0] == '%'));
+        word--;
     }
+    word++;
+    value = (size == 2) ? (short) my_atoi(word) : (int) my_atoi(word);
     cw_write_inv_endian(byte, (char *) &value, size);
     return (size);
 }
@@ -96,7 +102,8 @@ ssize_t cw_compile_instruction_param(compiler_t *compiler, char **bytes,
         return (-2);
     **bytes = compiler->current_inst->code;
     if (IS_PARAM_BYTE(compiler->current_inst->code)) {
-        cw_fix_param_byte(compiler->current_inst, &param_byte);
+        param_byte = param_byte << (2 * (MAX_ARGS_NUMBER
+        - compiler->current_inst->nbr_args));
         (*bytes)[location++] = param_byte;
     }
     for (unsigned char i = 0; i < compiler->current_inst->nbr_args; i++)

@@ -53,7 +53,7 @@ struct flag_queue_s {
     size_t location;
     size_t line;
     char *flag_ptr;
-    op_t *instruction;
+    ssize_t value_size;
     struct flag_queue_s *before;
     struct flag_queue_s *next;
 };
@@ -90,15 +90,16 @@ ssize_t cw_write_instructions(compiler_t *compiler, int fd);
 */
 ssize_t cw_flags_location(compiler_t *compiler, char *flag);
 int cw_flags_register(compiler_t *compiler, char *flag, size_t loc);
-int cw_flags_compile(compiler_t *compiler, char *flag, char *bytes);
+int cw_flags_compile(compiler_t *compiler, char *flag, char *bytes,
+    ssize_t value_size);
 void cw_flags_clear(compiler_t *compiler);
 
 /*
 * Functions for manage flag queue.
 */
 int cw_flags_queue_compile(compiler_t *compiler, char *flags);
-int cw_flags_queue_register(compiler_t *compiler, char *flag, size_t loc,
-    char *flag_ptr);
+int cw_flags_queue_register(compiler_t *compiler, char *flag, char *flag_ptr,
+    size_t value_size);
 void cw_flags_queue_clear(compiler_t *compiler);
 
 /*

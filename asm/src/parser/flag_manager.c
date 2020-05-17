@@ -32,21 +32,19 @@ ssize_t cw_flags_location(compiler_t *compiler, char *flag)
     return (node ? (ssize_t) node->location : -1);
 }
 
-int cw_flags_compile(compiler_t *compiler, char *flag, char *bytes)
+int cw_flags_compile(compiler_t *compiler, char *flag, char *bytes,
+    ssize_t value_size)
 {
     ssize_t location;
-    size_t value_size;
     int value;
 
     if (!compiler || !bytes)
         return (-2);
-    value_size = GET_DIRECT_SIZE(compiler->current_inst->code);
     location = cw_flags_location(compiler, flag);
     if (location == -2)
         return (-2);
     else if (location == -1) {
-        value = cw_flags_queue_register(compiler, flag,
-            compiler->current_byte, bytes);
+        value = cw_flags_queue_register(compiler, flag, bytes, value_size);
         if (value < 0)
             return (value);
         return (value_size);
