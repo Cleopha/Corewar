@@ -16,20 +16,20 @@ void attribute_prognumber(param_t *param);
 elem_t *add_elem(int n, int a, elem_t *actual);
 elem_t *param_list(int n, int a);
 
-static int error_progNumber(char *av, int *index, param_t *param)
+static int error_prognumber(char *av, int *index, param_t *param)
 {
-    int nbProg = 0;
+    int nb_prog = 0;
 
     if (param->values[PROGNUMBER] == 0) {
         if (!av || is_num(av))
             return (display_error(err[ERR_PROGNUMBER]));
-        nbProg = getnbr(av);
-        if (!(1 <= nbProg && nbProg <= 4))
+        nb_prog = getnbr(av);
+        if (!(1 <= nb_prog && nb_prog <= 4))
             return (display_error(err[ERR_PROGNUMBER]));
-        if (param->prog[nbProg - 1])
+        if (param->prog[nb_prog - 1])
             return (display_error(err[ASS_PROGNUMBER]));
-        param->values[PROGNUMBER] = nbProg;
-        param->prog[nbProg - 1] = true;
+        param->values[PROGNUMBER] = nb_prog;
+        param->prog[nb_prog - 1] = true;
         *index += 1;
         return (0);
     } else
@@ -90,7 +90,7 @@ int loop_error(char **av, param_t *param, elem_t **champs)
 {
     for (int i = 1; av[i]; i += 1) {
         if (tabequals(av[i], "-n", sizeof(char))) {
-            if (error_progNumber(av[i + 1], &i, param))
+            if (error_prognumber(av[i + 1], &i, param))
                 return (1);
             continue;
         }
