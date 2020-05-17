@@ -66,7 +66,7 @@ void fill_params(vm_t *vm, elem_t *champ, unsigned char buffer[], int *i)
         param.param_len = 2;
         }
         direct_param(buffer, vm, *i, &param);
-        for (int j = 0; j < param.param_len; j++)
+        for (unsigned int j = 0; j < param.param_len; j++)
             vm->mem[*i + champ->address + j] = param.en.str[j];
         *i += param.param_len;
     }

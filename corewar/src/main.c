@@ -60,6 +60,6 @@ int main(int ac, char **av)
 
     if (error(ac, av, &champs, &vm) || fill_mem(&vm, champs))
         return (1);
-    loop_vm(&vm, &champs);
+    loop_vm(&vm, champs);
     return (0);
 }

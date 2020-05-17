@@ -17,13 +17,13 @@ void check_dump(vm_t *vm, int dump_cp)
     }
 }
 
-void check_alive_champs(vm_t *vm, elem_t **champs)
+void check_alive_champs(vm_t *vm, elem_t *champs)
 {
     int nb = (int)vm->nb_live / NBR_LIVE;
 
     vm->cycles_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * nb);
 
-    for (elem_t *current = *champs; current; current = current->next) {
+    for (elem_t *current = champs; current; current = current->next) {
         if ((current)->is_alive)
             (current)->is_alive = false;
         else {
@@ -33,28 +33,28 @@ void check_alive_champs(vm_t *vm, elem_t **champs)
     }
 }
 
-void exec_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
-elem_t **))
+void exec_champ_inst(vm_t *vm, elem_t *champs, int (*inst_ptr[])(vm_t *,
+                        elem_t *))
 {
-    if (vm->mem[(*champs)->pc] > 0 && vm->mem[(*champs)->pc] < 17)
-        inst_ptr[vm->mem[(*champs)->pc] - 1](vm, champs);
+    if (vm->mem[champs->pc] > 0 && vm->mem[champs->pc] < 17)
+        inst_ptr[vm->mem[champs->pc] - 1](vm, champs);
 }
 
-void check_champ_inst(vm_t *vm, elem_t **champs, int (*inst_ptr[])(vm_t *,
-                        elem_t **))
+void check_champ_inst(vm_t *vm, elem_t *champs, int (*inst_ptr[])(vm_t *,
+                        elem_t *))
 {
-    for (elem_t *current = *champs; current; current = current->next) {
+    for (elem_t *current = champs; current; current = current->next) {
         if ((current)->instruction_cycles == 0) {
-            exec_champ_inst(vm, &current, inst_ptr);
+            exec_champ_inst(vm, current, inst_ptr);
         }
         else
             (current)->instruction_cycles -= 1;
     }
 }
 
-int loop_vm(vm_t *vm, elem_t **champs)
+int loop_vm(vm_t *vm, elem_t *champs)
 {
-    int (*inst_ptr[])(vm_t *, elem_t **) = {live, ld, st, add, sub, and, or,
+    int (*inst_ptr[])(vm_t *, elem_t *) = {live, ld, st, add, sub, and, or,
     xor, zjmp, ldi, sti, my_fork, lld, lldi, lfork, aff};
     int dump_cp = vm->dump;
 
@@ -68,9 +68,9 @@ int loop_vm(vm_t *vm, elem_t **champs)
             check_alive_champs(vm, champs);
     }
     my_putstr("\nThe player ");
-    my_putnbr((*champs)->prog_number);
+    my_putnbr(champs->prog_number);
     my_putstr(" (");
-    my_putstr((*champs)->header.prog_name);
+    my_putstr(champs->header.prog_name);
     my_putstr(") has won.\n");
     return (0);
 }

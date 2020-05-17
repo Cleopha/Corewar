@@ -12,18 +12,18 @@ void remove_champ(elem_t **champs)
 {
     elem_t *copy = *champs;
 
-    if ((*champs) == NULL)
+    if (champs == NULL)
         return;
     if (copy->next)
         copy->next->prev = copy->prev;
     if (copy->prev)
         copy->prev->next = copy->next;
     if (copy->prev)
-        (*champs) = copy->prev;
+        *champs = copy->prev;
     else if (copy->next)
-        (*champs) = copy->next;
+        *champs = copy->next;
     else
-        (*champs) = NULL;
+        *champs = NULL;
     free (copy);
     copy = NULL;
 }

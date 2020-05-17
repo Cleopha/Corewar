@@ -23,14 +23,14 @@ void set_param_with_byte(unsigned char coding_byte, unsigned char params[4])
     params[3] = (coding_byte & 3);
 }
 
-void skip_coding_byte(elem_t **champs, vm_t *vm,
+void skip_coding_byte(elem_t *champs, vm_t *vm,
 unsigned char params[4], int nb_inst)
 {
     unsigned char coding_byte = 0;
 
-    (*champs)->instruction_cycles = nb_inst;
-    (*champs)->index_actual += 1;
-    coding_byte = vm->mem[(*champs)->index_actual];
+    champs->instruction_cycles = nb_inst;
+    champs->index_actual += 1;
+    coding_byte = vm->mem[champs->index_actual];
     set_param_with_byte(coding_byte, params);
-    (*champs)->index_actual += 1;
+    champs->index_actual += 1;
 }
