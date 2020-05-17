@@ -13,7 +13,7 @@ int st(vm_t *vm, elem_t *champs)
     int value = 0;
 
     skip_coding_byte(champs, vm, params, 5);
-    value = champs->reg[get_index_reg(vm, champs)];
+    get_param(params[0], &value, vm, champs);
     if (params[1] == REG)
         champs->reg[get_index_reg(vm, champs)] = value;
     else if (params[1] == IND)
