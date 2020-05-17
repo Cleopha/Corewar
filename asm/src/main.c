@@ -9,7 +9,6 @@
 
 int main(int argc, char **argv)
 {
-    my_atoi("2147483648");
     int prog_return = 0;
     ssize_t result = 0;
 
