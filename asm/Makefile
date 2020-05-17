@@ -24,6 +24,7 @@ SRC	=	$(COMPILER)/free/compiler.c		\
 		$(COMPILER)/operations.c		\
 		$(COMPILER)/compiler.c			\
 		$(COMPILER)/util/hash.c			\
+		$(COMPILER)/util/my_atoi.c		\
 		$(COMPILER)/util/error.c		\
 
 SRC	+=	$(PARSER)/word_parser.c	\

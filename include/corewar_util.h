@@ -14,5 +14,6 @@
 #include "cubee.h"
 
 size_t strhash(const char *str);
+int my_atoi(char const *str);
 
 #endif

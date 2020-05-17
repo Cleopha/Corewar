@@ -66,13 +66,13 @@ static ssize_t cw_write_instruction_param(compiler_t *compiler, char *byte,
         if (word[1] == LABEL_CHAR)
             return (cw_flags_compile(compiler, word + 2, byte));
         else
-            value = getnbr(word + 1);
+            value = my_atoi(word + 1);
     } else if (word[0] == 'r') {
         size = 1;
-        value = (char) getnbr(word + 1);
+        value = (char) my_atoi(word + 1);
     } else {
         size = 2;
-        value = (short) getnbr(word);
+        value = (short) my_atoi(word + (word[0] == '%'));
     }
     cw_write_inv_endian(byte, (char *) &value, size);
     return (size);
