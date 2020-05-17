@@ -14,7 +14,6 @@ int sti(vm_t *vm, elem_t *champs)
     int value_one = 0;
     int value_two = 0;
 
-    printf("STI\n");
     skip_coding_byte(champs, vm, params, 25);
     value_reg = champs->reg[get_index_reg(vm, champs)];
     get_param(params[1], &value_one, vm, champs);
