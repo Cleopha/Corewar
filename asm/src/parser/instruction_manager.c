@@ -45,5 +45,3 @@ ssize_t cw_write_instructions(compiler_t *compiler, int fd)
     }
     return (total_write);
 }
-
-
