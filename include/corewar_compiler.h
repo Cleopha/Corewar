@@ -16,9 +16,9 @@
 #include "corewar_util.h"
 #include "cubee.h"
 
-#define GET_DIRECT_SIZE(code) (code >= 9 && code <= 15 ? 2 : 4)
+#define GET_DIRECT_SIZE(code) (((code >= 9 && code <= 12) \
+    || code == 14 || code == 15) ? 2 : 4)
 #define IS_PARAM_BYTE(c) (c != 1 && c != 9 && c != 12 && c != 15)
-
 #define PRINT_ERROR(msg) (print_error(NULL, 0, msg))
 
 /*

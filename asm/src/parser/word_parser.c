@@ -45,6 +45,8 @@ static ssize_t parse_instruction(compiler_t *compiler, char *line)
     for (ssize_t i = 0; line[i]; i++)
         if (line[i] == ',' || line[i] == '\t')
             line[i] = ' ';
+        else if (line[i] == '#')
+            line[i] = 0;
     words = (char **) tabsplit_clean(line, " ", sizeof(char));
     if (!words)
         return (0);

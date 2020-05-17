@@ -27,9 +27,10 @@ static ssize_t cw_write_instruction(compiler_t *compiler, char **bytes,
         print_compiler_error(compiler, "Invalid instruction.");
         return (-1);
     }
-    if (tablen(words + 1,sizeof(char *))
+    if (tablen(words + 1, sizeof(char *))
         != (size_t) compiler->current_inst->nbr_args) {
-        print_compiler_error(compiler, "Invalid argument number.");
+        print_compiler_error(compiler, "The argument given to the "
+            "instruction is invalid.");
         return (-1);
     }
     return (cw_compile_instruction_param(compiler, bytes, words + 1));

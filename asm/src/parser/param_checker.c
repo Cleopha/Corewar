@@ -11,6 +11,8 @@ static int str_contain_only(const char *str, const char *chars)
 {
     const char *index = chars;
 
+    if (!*str)
+        return (0);
     for (size_t i = 0; str[i]; i++) {
         while (*index && str[i] != *index)
             index++;
@@ -82,7 +84,7 @@ ssize_t indirect_checker(compiler_t *compiler, char type, const char *word)
         checker_result = label_checker(compiler, type, word + 1);
         return (!checker_result ? IND_SIZE : checker_result);
     }
-    if (word[0] == '+' || word[1] == '-')
+    if (word[0] == '+' || word[0] == '-')
         word++;
     if (!(type & T_IND) || !str_contain_only(word, "0123456789")) {
         print_compiler_error(compiler, "The argument "
