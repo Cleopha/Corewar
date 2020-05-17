@@ -24,6 +24,6 @@ void remove_champ(elem_t **champs)
         *champs = copy->next;
     else
         *champs = NULL;
-    free (copy);
+    free(copy);
     copy = NULL;
 }

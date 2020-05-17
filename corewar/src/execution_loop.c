@@ -17,19 +17,20 @@ void check_dump(vm_t *vm, int dump_cp)
     }
 }
 
-void check_alive_champs(vm_t *vm, elem_t *champs)
+void check_alive_champs(vm_t *vm, elem_t **champs)
 {
     int nb = (int)vm->nb_live / NBR_LIVE;
 
     vm->cycles_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * nb);
 
-    for (elem_t *current = champs; current; current = current->next) {
-        if ((current)->is_alive)
-            (current)->is_alive = false;
-        else {
-            remove_champ(&current);
+    for (elem_t **current = champs; *current; *current = (*current)->next) {
+        if ((*current)->is_alive)
+            (*current)->is_alive = false;
+        else if (vm->nb_prog > 1) {
+            remove_champ(current);
             vm->nb_prog -= 1;
-        }
+        } else
+            break;
     }
 }
 
@@ -46,8 +47,7 @@ void check_champ_inst(vm_t *vm, elem_t *champs, int (*inst_ptr[])(vm_t *,
     for (elem_t *current = champs; current; current = current->next) {
         if ((current)->instruction_cycles == 0) {
             exec_champ_inst(vm, current, inst_ptr);
-        }
-        else
+        } else
             (current)->instruction_cycles -= 1;
     }
 }
@@ -58,14 +58,13 @@ int loop_vm(vm_t *vm, elem_t *champs)
     xor, zjmp, ldi, sti, my_fork, lld, lldi, lfork, aff};
     int dump_cp = vm->dump;
 
-    while (vm->nb_prog != 1) {
+    while (vm->nb_prog > 1) {
         check_champ_inst(vm, champs, inst_ptr);
-//        printf("%ld\n", vm->cycles_to_die);
         if (vm->dump >= 0)
             check_dump(vm, dump_cp);
         vm->cycles_to_die -= 1;
         if (vm->cycles_to_die == 0)
-            check_alive_champs(vm, champs);
+            check_alive_champs(vm, &champs);
     }
     my_putstr("\nThe player ");
     my_putnbr(champs->prog_number);
