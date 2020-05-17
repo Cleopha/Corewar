@@ -24,7 +24,7 @@ static ssize_t cw_write_instruction(compiler_t *compiler, char **bytes,
         return (-2);
     compiler->current_inst = get_instruction(words[0]);
     if (!compiler->current_inst) {
-        print_compiler_error(compiler, "Unknown instruction.");
+        print_compiler_error(compiler, "Invalid instruction.");
         return (-1);
     }
     if (tablen(words + 1,sizeof(char *))

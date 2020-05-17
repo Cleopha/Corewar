@@ -81,16 +81,16 @@ static ssize_t cw_write_instruction_param(compiler_t *compiler, char *byte,
 ssize_t cw_compile_instruction_param(compiler_t *compiler, char **bytes,
     char **words)
 {
-    ssize_t instruction_len = 1;
+    ssize_t instruction_len;
     char param_byte;
     ssize_t location = 1;
 
     if (!compiler || !compiler->current_inst || !bytes || !words)
         return (-2);
-    instruction_len += IS_PARAM_BYTE(compiler->current_inst->code);
-    instruction_len += cw_get_instruction_length(compiler, words, &param_byte);
+    instruction_len = cw_get_instruction_length(compiler, words, &param_byte);
     if (instruction_len < 0)
         return (instruction_len);
+    instruction_len += IS_PARAM_BYTE(compiler->current_inst->code) + 1;
     *bytes = malloc(instruction_len);
     if (!*bytes)
         return (-2);
@@ -102,5 +102,5 @@ ssize_t cw_compile_instruction_param(compiler_t *compiler, char **bytes,
     for (unsigned char i = 0; i < compiler->current_inst->nbr_args; i++)
         location += cw_write_instruction_param(compiler,
             *bytes + location, words[i]);
-    return (location);
+    return (instruction_len);
 }

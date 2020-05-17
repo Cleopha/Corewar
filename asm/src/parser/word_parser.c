@@ -22,8 +22,7 @@ static ssize_t write_header(compiler_t *compiler)
     if (!(compiler->header_complete & 1)) {
         print_error(compiler->file_path, 0, "No name specified.");
         return (-1);
-    }
-    if (!(compiler->header_complete & 2))
+    } else if (!(compiler->header_complete & 2))
         print_error(compiler->file_path, 0, "\033[31;1mWarning: "
             "\033[0m\033[1;36mNo comment specified.");
     compiler->header.prog_size = (int) compiler->current_byte;
@@ -82,13 +81,13 @@ static ssize_t parse_line(compiler_t *compiler)
 
 ssize_t cw_compile(compiler_t *compiler)
 {
-    ssize_t line_result = 0;
+    ssize_t line_result;
 
     if (!compiler || !compiler->file)
         return (-2);
-    for (; line_result >= 0; compiler->current_byte += line_result,
-        compiler->current_line++)
-        line_result = parse_line(compiler);
+    for (line_result = parse_line(compiler); line_result >= 0;
+        line_result = parse_line(compiler), compiler->current_line++)
+        compiler->current_byte += line_result;
     if (line_result == -3)
         line_result = 0;
     cw_flags_clear(compiler);
