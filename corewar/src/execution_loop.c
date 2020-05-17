@@ -38,7 +38,6 @@ void check_alive_champs(vm_t *vm, elem_t **champs)
 void exec_champ_inst(vm_t *vm, elem_t *champs, int (*inst_ptr[])(vm_t *,
                         elem_t *))
 {
-
     if (vm->mem[champs->pc] > 0 && vm->mem[champs->pc] < 17)
         inst_ptr[vm->mem[champs->pc] - 1](vm, champs);
 }

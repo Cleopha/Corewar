@@ -18,5 +18,6 @@ int st(vm_t *vm, elem_t *champs)
         champs->reg[get_index_reg(vm, champs)] = value;
     else if (params[1] == IND)
         ind_write(vm, champs, value, get_indirect(vm, champs));
+    champs->pc = champs->index_actual;
     return (0);
 }
