@@ -36,7 +36,7 @@ int error(int ac, char **av, elem_t **champs, vm_t *vm)
     elem_t *cpy = NULL;
 
     if (ac == 2 && (tabequals(av[1], "-h", sizeof(char)) ||
-       tabequals(av[1], "--help", sizeof(char))))
+    tabequals(av[1], "--help", sizeof(char))))
         return (man(av[0], 1));
     create_param(&param);
     if (loop_error(av, &param, champs))

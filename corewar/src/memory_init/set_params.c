@@ -43,7 +43,7 @@ void fill_params_with_byte_code(vm_t *vm, elem_t *champ, unsigned char buffer[],
         else
             break;
         for (unsigned int k = 0; param.param_len != 1 && k < param.param_len;
-             k++)
+        k++)
             vm->mem[champ->address + *i + k + param.len] = param.en.str[k];
         param.len += param.param_len;
     }
