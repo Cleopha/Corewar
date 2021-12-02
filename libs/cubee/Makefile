@@ -5,6 +5,11 @@
 ## MakeFile
 ##
 
+MAKEFLAGS	+=	--no-print-directory
+
+RM			?=	rm -f
+ECHO		=	`which echo`
+
 .PHONY: all clean fclean re tests_run coverage
 
 #   ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
@@ -95,6 +100,11 @@ NAME := libcubee.a
 
 TEST_NAME := unit_tests
 
+%.o:	%.c
+	@$(ECHO) -e -n "\033[95m[ LIB ]\033[0m"
+	@$(ECHO) "" $<
+	@gcc $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+
 #   ▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄   ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
 #  ▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌▐░░░░░░░░░░▌ ▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
 #  ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀
@@ -126,7 +136,8 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc ../$(NAME) $(OBJ)
+	@ar rc ../$(NAME) $(OBJ)
+	@$(ECHO) -e "\033[96m[ CREATION LIB ]\033[0m" $(NAME)
 
 tests_run: CPPFLAGS += -I$(TEST_FOLDER)/include
 tests_run: CFLAGS += --coverage
@@ -142,13 +153,16 @@ coverage:
 	gcovr --branches --exclude tests --html-details -o ./coverage/index.html
 
 clean:
-	find . -type f -name "*.gc*" -delete
-	rm -f $(OBJ)
-	rm -f $(TEST_OBJ)
-	rm -rf coverage
+	@for f in $(TOBJ); do if [ -f $$f ]; then $(ECHO) -e "\033[35m[ TU ]\033[0m" $$f; fi; done;
+	@for f in $(OBJ); do if [ -f $$f ]; then $(ECHO) -e "\033[91m[ RM LIB ]\033[0m" $$f; fi; done;
+	@for f in $(MOBJ); do if [ -f $$f ]; then $(ECHO) -e "\033[91m[ RM LIB ]\033[0m" $$f; fi; done;
+	@$(RM) $(OBJ) $(MOBJ) $(TOBJ)
+	@$(RM) $(GCDA)
+	@$(RM) $(GCNO)
+	@$(RM) coverage
 
 fclean: clean
-	rm -f ../$(NAME)
-	rm -f $(TEST_NAME)
+	@if [ -f ../$(NAME) ]; then $(ECHO) -e "\033[33m[ RM ]\033[0m" ../$(NAME); fi;
+	@$(RM) ../$(NAME) unit_test
 
 re: fclean all

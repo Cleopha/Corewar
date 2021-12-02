@@ -5,6 +5,8 @@
 ## Coline SEGURET's Makefile made the 05/07/2020
 ##
 
+MAKEFLAGS	+=	--no-print-directory
+
 all:
 		@make -C ./libs/cubee all
 		@make -C ./asm all
